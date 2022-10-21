@@ -1,13 +1,16 @@
-import {userSecretsStoreModel} from "./index"
+import { userSecretsStoreModel } from './index'
 
 export const reducers = {
-    setClockifyApiKey(state: userSecretsStoreModel, {
-        payload
-    }: { payload: { clockifyApiKey: string } }): void {
+    setClockifyApiKey(
+        state: userSecretsStoreModel,
+        { payload }: { payload: { clockifyApiKey: string } },
+    ): void {
         state.clockifyApiKey = payload.clockifyApiKey
-    }, setAzureDevOpsToken(state: userSecretsStoreModel, {
-        payload
-    }: { payload: { azureDevOpsToken: string } }): void {
+    },
+    setAzureDevOpsToken(
+        state: userSecretsStoreModel,
+        { payload }: { payload: { azureDevOpsToken: string } },
+    ): void {
         state.azureDevOpsToken = payload.azureDevOpsToken
     },
 }

@@ -1,6 +1,7 @@
-﻿import React, {FC, ReactNode} from 'react'
-import {Layout} from 'antd'
-import {ModalContainer} from "../modals/ModalContainer"
+﻿import { Layout } from 'antd'
+import React, { FC, ReactNode } from 'react'
+
+import { ModalContainer } from '../modals/ModalContainer'
 
 export interface BaseLayoutProps {
     headerHeight?: number
@@ -8,25 +9,18 @@ export interface BaseLayoutProps {
     children?: ReactNode
 }
 
-const {
-    Header, Content
-} = Layout
+const { Header, Content } = Layout
 
-export const BaseLayout: FC<BaseLayoutProps> = ({
-                                                    headerHeight = 75, children
-                                                }) => {
+export const BaseLayout: FC<BaseLayoutProps> = ({ headerHeight = 75, children }) => {
     return (
         <Layout>
-            <Header>
-                HEADER
-            </Header>
+            <Header>HEADER</Header>
             <Layout
                 className="px-10 py-5"
-                style={{minHeight: `calc(100vh - ${headerHeight}px)`}}>
-                <Content>
-                    {children}
-                </Content>
-                <ModalContainer/>
+                style={{ minHeight: `calc(100vh - ${headerHeight}px)` }}
+            >
+                <Content>{children}</Content>
+                <ModalContainer />
             </Layout>
         </Layout>
     )

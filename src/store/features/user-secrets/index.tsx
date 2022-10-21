@@ -1,13 +1,16 @@
-import {createSlice} from '@reduxjs/toolkit'
-import {reducers} from './reducers'
-import {Dayjs} from "dayjs"
+import { createSlice } from '@reduxjs/toolkit'
+
+import { reducers } from './reducers'
 
 export interface userSecretsStoreModel {
-    clockifyApiKey?: string,
+    clockifyApiKey?: string
     azureDevOpsToken?: string
 }
 
-const initialState: userSecretsStoreModel = {clockifyApiKey: undefined, azureDevOpsToken: undefined}
+const initialState: userSecretsStoreModel = {
+    clockifyApiKey: undefined,
+    azureDevOpsToken: undefined,
+}
 
 export const userSecretsSlice = createSlice({
     name: 'userSecrets',

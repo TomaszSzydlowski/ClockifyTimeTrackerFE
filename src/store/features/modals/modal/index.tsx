@@ -1,17 +1,18 @@
-import {createSlice} from '@reduxjs/toolkit'
-import {reducers} from './reducers'
-import {ModalType} from "../../../../core/types/enums/ModalType"
+import { createSlice } from '@reduxjs/toolkit'
+
+import { ModalType } from '../../../../core/types/enums/ModalType'
+import { reducers } from './reducers'
 
 export interface Modal<T> {
-    type: ModalType;
-    props?: T;
+    type: ModalType
+    props?: T
 }
 
 export interface ModalStoreModel {
     modals: Modal<any>[]
 }
 
-const initialState: ModalStoreModel = {modals: [], }
+const initialState: ModalStoreModel = { modals: [] }
 
 export const modalSlice = createSlice({
     name: 'modal',

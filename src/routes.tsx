@@ -1,17 +1,18 @@
-import {FC} from "react"
-import {PageNotFound} from "./view/pages/PageNotFound"
-import {HomePage} from "./view/pages/HomePage"
+import { FC } from 'react'
+
+import { HomePage } from './view/pages/HomePage'
+import { PageNotFound } from './view/pages/PageNotFound'
 
 interface ConfigRoute {
-    path: string;
-    component: FC;
-    routes?: ConfigRoute[];
-    allowUserWithNoAccess: boolean;
+    path: string
+    component: FC
+    routes?: ConfigRoute[]
+    allowUserWithNoAccess: boolean
 }
 
 interface ConfigRedirect {
-    redirect: string;
-    path: string;
+    redirect: string
+    path: string
 }
 
 export const AppRedirect: ConfigRedirect[] = [
@@ -25,16 +26,16 @@ export const AppRoutes: ConfigRoute[] = [
     {
         path: '/home',
         component: HomePage,
-        allowUserWithNoAccess: false
+        allowUserWithNoAccess: false,
     },
     {
         path: 'not-found',
         component: PageNotFound,
-        allowUserWithNoAccess: true
+        allowUserWithNoAccess: true,
     },
     {
         path: '*',
         component: PageNotFound,
-        allowUserWithNoAccess: true
-    }
+        allowUserWithNoAccess: true,
+    },
 ]
