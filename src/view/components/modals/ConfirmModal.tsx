@@ -29,7 +29,7 @@ export const ConfirmModal: FC<ConfirmModalProps> = ({
         <Modal
             className="confirm-modal"
             onCancel={handleStay}
-            visible
+            open
             closable
             centered
             closeIcon={<i className="fas fa-times"/>}

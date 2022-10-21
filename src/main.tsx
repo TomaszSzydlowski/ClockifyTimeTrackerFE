@@ -9,7 +9,8 @@ import {HashRouter, Navigate, Route, Routes} from "react-router-dom"
 import {AppRedirect, AppRoutes} from "./routes"
 import {RedirectUrlSanitizer} from "./view/components/app/RedirectUrlSanitizer"
 import {CurrentUserSettings} from "./view/components/app/CurrentUserSettings"
-import {buildStore} from "./store";
+import {buildStore} from "./store"
+import 'antd/dist/antd.css'
 
 const authRequest = {scopes: ["User.Read"]}
 
