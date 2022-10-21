@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './view/styles/index.css'
+import './view/styles/index.scss'
 import {MsalAuthenticationTemplate, MsalProvider} from '@azure/msal-react'
 import {msalInstance} from "./core/auth/authProvider"
 import {InteractionType} from "@azure/msal-browser"
