@@ -9,8 +9,8 @@ import {userSecretsActions} from "../../../store/features/user-secrets";
 import {AZURE_DEV_OPS_TOKEN, CLOCKIFY_KEY} from "../../../core/consts/consts";
 
 export const CurrentUserSettings: FC = () => {
-    const [isFirstRun, setIsFirstRun] = useState<boolean>(true)
     const dispatch = useDispatch()
+    const [isFirstRun, setIsFirstRun] = useState<boolean>(true)
     const azureDevOpsToken = useSelector(userSecretsSelectors.getUserSecretsAzureDevOpsToken)
     const clockifyApiKey = useSelector(userSecretsSelectors.getUserSecretsClockifyApiKey)
 

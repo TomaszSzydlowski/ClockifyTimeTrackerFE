@@ -9,7 +9,11 @@
     "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "tsc && vite build --base=./ ",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
+    "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
+    "lint": "yarn lint:format && yarn lint:fix ",
+    "type-check": "tsc"
   },
   "dependencies": {
     "@azure/msal-browser": "^2.30.0",
@@ -27,8 +31,18 @@
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-basic-ssl": "^0.1.2",
     "@vitejs/plugin-react": "^2.1.0",
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
+    "eslint": "^8.8.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "gh-pages": "^4.0.0",
     "sass": "^1.55.0",
+    "prettier": "^2.5.1",
     "typescript": "^4.6.4",
     "vite": "^3.1.0"
   }
