@@ -1,32 +1,58 @@
-﻿import { Button, Modal } from 'antd'
-import React, {FC, useState} from 'react'
+﻿import React, {FC} from 'react'
+import {Col, Row, Modal, Button} from 'antd'
+import {useDispatch} from 'react-redux'
+import {modalActions} from '../../../store/features/modals/modal'
 
-export const UserSecretModal: FC = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+export interface SaveModalProps {
+    onSave?(): void,
+    onDontSave?(): void,
+    title?: string,
+    description?: string,
+}
 
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
+export const UserSecretsModal: FC<SaveModalProps> = ({
+                                                  title, description, onSave, onDontSave
+                                              }) => {
+    const dispatch = useDispatch()
 
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
+    const hideModal = () => dispatch(modalActions.hideModal())
 
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
+    const handleDontSave = () => {
+        hideModal()
+        if(onDontSave) onDontSave()
+    }
+
+    const handleSave = () => {
+        hideModal()
+        if(onSave) onSave()
+    }
 
     return (
-        <>
-            <Button type="primary" onClick={showModal}>
-        Open Modal
-    </Button>
-    <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <p>Some contents...</p>
-    <p>Some contents...</p>
-    <p>Some contents...</p>
-    </Modal>
-    </>
-);
-};
-
+        <Modal
+            className="confirm-modal"
+            onCancel={hideModal}
+            visible
+            closable
+            centered
+            closeIcon={<i className="fas fa-times"/>}
+            footer={[
+                <Button
+                    key="dontSave"
+                    danger
+                    type="primary"
+                    onClick={handleDontSave}>{"DON'T SAVE"}</Button>,
+                <Button
+                    key="save"
+                    color="primary"
+                    type="primary"
+                    onClick={handleSave}>{'SAVE'}</Button>
+            ]}>
+            <Row>
+                <Col xs={24}>
+                    <h1>{title}</h1>
+                    <p>{description}</p>
+                </Col>
+            </Row>
+        </Modal>
+    )
+}

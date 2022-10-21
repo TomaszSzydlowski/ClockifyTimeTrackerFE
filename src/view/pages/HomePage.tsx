@@ -1,10 +1,11 @@
 ﻿import React, {FC} from 'react'
-import {Button, Result} from "antd"
-import {useNavigate} from "react-router-dom"
+import {BaseLayout} from "../components/layouts/BaseLayout"
 
 export const HomePage: FC = () => {
-    
+
     return (
-      <div>HOME PAGE</div>
+        <BaseLayout>
+            <div>HOME PAGE</div>
+        </BaseLayout>
     )
 }
