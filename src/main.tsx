@@ -7,6 +7,7 @@ import {InteractionType} from "@azure/msal-browser"
 import {HashRouter, Navigate, Route, Routes} from "react-router-dom"
 import {AppRedirect, AppRoutes} from "./routes"
 import {RedirectUrlSanitizer} from "./view/components/app/RedirectUrlSanitizer"
+import {CurrentUserSettings} from "./view/components/app/CurrentUserSettings";
 
 const authRequest = {scopes: ["User.Read"]}
 
@@ -18,20 +19,21 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                 authenticationRequest={authRequest}>
                 <RedirectUrlSanitizer/>
                 <HashRouter>
-                <Routes>
-                    {AppRedirect.map((route, i: number) => (
-                        <Route
-                            key={`redirect-${i}`}
-                            path={route.path}
-                            element={<Navigate to={route.redirect}/>}/>
-                    ))}
-                    {AppRoutes.map((route, i: number) => (
-                        <Route
-                            path={route.path}
-                            key={`route-${i}`}
-                            element={<route.component/>}/>
-                    ))}
-                </Routes>
+                    <CurrentUserSettings/>
+                    <Routes>
+                        {AppRedirect.map((route, i: number) => (
+                            <Route
+                                key={`redirect-${i}`}
+                                path={route.path}
+                                element={<Navigate to={route.redirect}/>}/>
+                        ))}
+                        {AppRoutes.map((route, i: number) => (
+                            <Route
+                                path={route.path}
+                                key={`route-${i}`}
+                                element={<route.component/>}/>
+                        ))}
+                    </Routes>
                 </HashRouter>
             </MsalAuthenticationTemplate>
         </MsalProvider>
