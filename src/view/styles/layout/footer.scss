@@ -1,27 +1,27 @@
-﻿.ant-layout-footer {
-  padding: 0 !important;
-}
-
-.footer_box {
+﻿.footer_box {
   display: flex;
   justify-content: center;
-
+  height: 60px;
+  align-items: center;
+  color: gray;
+  
   &__element {
-    padding: 6px 12px;
-    color: gray;
+    padding-left: 12px;
+    padding-right: 12px;
 
     span {
       display: block;
     }
-    
-    .anticon{
+
+    .anticon {
       font-size: 22px;
     }
-    
-    &--is-active{
+
+    &--is-active {
       color: white;
     }
-    &-description{
+
+    &-description {
       padding: 4px 0;
       font-size: 12px;
     }

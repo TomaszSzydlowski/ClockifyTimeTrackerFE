@@ -1,7 +1,10 @@
-@import "layout";
-@import "footer";
+@import "base/spaces";
+@import "./layout/layout";
+@import "./layout/footer";
+@import "./custom/swiper";
+@import "./pages/home";
 
-#root{
+#root {
   height: 100%;
 }
 

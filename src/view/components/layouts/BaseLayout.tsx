@@ -14,14 +14,14 @@ const { Header, Footer, Content } = Layout
 
 export const BaseLayout: FC<BaseLayoutProps> = ({
     headerHeight = 75,
-    footerHeight = 75,
+    footerHeight = 60,
     children,
 }) => {
     return (
         <Layout>
             <Header>HEADER</Header>
             <Layout
-                className="px-10 py-5"
+                className="px-4"
                 style={{ minHeight: `calc(100vh - ${headerHeight + footerHeight}px)` }}
             >
                 <Content>{children}</Content>

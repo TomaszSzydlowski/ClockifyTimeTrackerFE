@@ -1,0 +1,17 @@
+﻿.ant-layout {
+  height: 100%;
+  position: relative;
+  
+  .ant-layout{
+    overflow:auto;
+    max-height:1px;
+  }
+
+  .ant-layout-footer {
+    padding: 0 !important;
+    bottom: 0;
+    width: 100%;
+    position:absolute;
+    left:0;
+  }
+}
