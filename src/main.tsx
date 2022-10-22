@@ -1,5 +1,5 @@
 import './view/styles/index.scss'
-import 'antd/dist/antd.css'
+import 'antd/dist/antd.dark.css'
 
 import { InteractionType } from '@azure/msal-browser'
 import { MsalAuthenticationTemplate, MsalProvider } from '@azure/msal-react'
