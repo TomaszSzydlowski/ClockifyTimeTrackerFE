@@ -3,6 +3,7 @@ import React, { FC, ReactNode } from 'react'
 
 import { ModalContainer } from '../modals/ModalContainer'
 import { FooterContent } from './FooterContent'
+import { HeaderContent } from './HeaderContent'
 
 export interface BaseLayoutProps {
     headerHeight?: number
@@ -13,15 +14,16 @@ export interface BaseLayoutProps {
 const { Header, Footer, Content } = Layout
 
 export const BaseLayout: FC<BaseLayoutProps> = ({
-    headerHeight = 75,
+    headerHeight = 48,
     footerHeight = 60,
     children,
 }) => {
     return (
-        <Layout>
-            <Header>HEADER</Header>
+        <Layout className="px-4">
+            <Header>
+                <HeaderContent />
+            </Header>
             <Layout
-                className="px-4"
                 style={{ minHeight: `calc(100vh - ${headerHeight + footerHeight}px)` }}
             >
                 <Content>{children}</Content>

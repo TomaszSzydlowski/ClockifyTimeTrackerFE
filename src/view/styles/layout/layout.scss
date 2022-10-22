@@ -6,6 +6,14 @@
     overflow:auto;
     max-height:1px;
   }
+  
+  .ant-layout-header{
+    display: flex;
+    align-items: center;
+    background-color: black;
+    padding: 0;
+    height: 48px;
+  }
 
   .ant-layout-footer {
     padding: 0 !important;
