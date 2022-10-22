@@ -1,7 +1,10 @@
 import { FC } from 'react'
 
+import { DonatePage } from './view/pages/DonatePage'
 import { HomePage } from './view/pages/HomePage'
 import { PageNotFound } from './view/pages/PageNotFound'
+import { SearchPage } from './view/pages/SearchPage'
+import { SettingsPage } from './view/pages/SettingsPage'
 
 interface ConfigRoute {
     path: string
@@ -26,6 +29,21 @@ export const AppRoutes: ConfigRoute[] = [
     {
         path: '/home',
         component: HomePage,
+        allowUserWithNoAccess: false,
+    },
+    {
+        path: '/search',
+        component: SearchPage,
+        allowUserWithNoAccess: false,
+    },
+    {
+        path: '/settings',
+        component: SettingsPage,
+        allowUserWithNoAccess: false,
+    },
+    {
+        path: '/donate',
+        component: DonatePage,
         allowUserWithNoAccess: false,
     },
     {
