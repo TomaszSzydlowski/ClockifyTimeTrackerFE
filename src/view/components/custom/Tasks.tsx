@@ -94,12 +94,13 @@ export const Tasks: FC = () => {
 
     const [quickActionTask, setQuickActionTask] = useState<QuickActionTask[]>([])
     const handleStartClick = async (projectId: string, taskId: string) => {
-        console.log(`start: ${projectId}, ${workspaceId}`)
         if (!workspaceId) return console.error('missing workspaceId')
         await TimeEntryApi.startTracking(workspaceId, projectId, taskId)
     }
-    const handlePauseClick = (projectId: string, workspaceId: string) => {
-        return console.log(`pause: ${projectId}, ${workspaceId}`)
+    const handlePauseClick = async () => {
+        if (!workspaceId) return console.error('missing workspaceId')
+        if (!userId) return console.error('missing userId')
+        await TimeEntryApi.stopTracking(workspaceId, userId)
     }
     return (
         <div className="tasks_list">
@@ -114,12 +115,7 @@ export const Tasks: FC = () => {
                             quickActionTask.taskId,
                         )
                     }
-                    onPauseClick={() =>
-                        handlePauseClick(
-                            quickActionTask.projectId,
-                            quickActionTask.taskId,
-                        )
-                    }
+                    onPauseClick={handlePauseClick}
                 />
             ))}
         </div>

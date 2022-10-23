@@ -4,4 +4,5 @@
     DELETE = 'DELETE',
     PUT = 'PUT',
     HEAD = 'HEAD',
+    PATCH = 'PATCH',
 }

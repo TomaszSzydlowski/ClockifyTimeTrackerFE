@@ -20,5 +20,7 @@ export const endpoints = {
             `${clockifyBaseApi}/workspaces/${workspaceId}/user/${userId}/time-entries`,
         startTracking: (workspaceId: string) =>
             `${clockifyBaseApi}/workspaces/${workspaceId}/time-entries`,
+        stopTracking: (workspaceId: string, userId: string) =>
+            `${clockifyBaseApi}/workspaces/${workspaceId}/user/${userId}/time-entries`,
     },
 }

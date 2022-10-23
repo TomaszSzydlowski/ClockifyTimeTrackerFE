@@ -41,4 +41,13 @@ export default class TimeEntryApi {
             },
         )
     }
+
+    static async stopTracking(workspaceId: string, userId: string): Promise<void> {
+        const { data } = await HttpClient.patch(
+            endpoints.timeEntry.stopTracking(workspaceId, userId),
+            {
+                end: dayjs().toDate(),
+            },
+        )
+    }
 }

@@ -47,6 +47,14 @@ export default class HttpClient {
         )
     }
 
+    static patch(
+        url: string,
+        formData = {},
+        config: AxiosRequestConfig = {},
+    ): Promise<AxiosResponse> {
+        return HttpClient.makeRequest(HttpMethod.PATCH, url, formData, config)
+    }
+
     static async makeRequest(
         method: HttpMethod,
         url: string,
@@ -64,6 +72,8 @@ export default class HttpClient {
                 return axios.get(url, config)
             case HttpMethod.HEAD:
                 return axios.head(url, config)
+            case HttpMethod.PATCH:
+                return axios.patch(url, formData, config)
         }
     }
 }
