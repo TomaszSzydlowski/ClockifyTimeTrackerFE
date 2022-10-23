@@ -1,8 +1,37 @@
-﻿import React, { FC } from 'react'
+﻿import { AnyAction } from '@reduxjs/toolkit'
+import React, { FC, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
+import { tasksAsyncActions } from '../../../store/features/clockify/tasks/asyncActions'
+import { tasksSelectors } from '../../../store/features/clockify/tasks/selectors'
+import { userClockifySelectors } from '../../../store/features/clockify/user/selectors'
+import { workspacesClockifySelectors } from '../../../store/features/clockify/workspaces/selectors'
+import { userSecretsSelectors } from '../../../store/features/user-secrets/selectors'
 import { Task } from './Task'
 
 export const Tasks: FC = () => {
+    const dispatch = useDispatch()
+    const tasks = useSelector(tasksSelectors.getLastTimeEntries)
+    const userId = useSelector(userClockifySelectors.getUserId)
+    const workspaces = useSelector(workspacesClockifySelectors.getWorkspaces)
+
+    const [workspaceId, setWorkspaceId] = useState<string | undefined>(undefined)
+
+    useEffect(() => {
+        if (workspaces !== undefined) setWorkspaceId(workspaces[0].id)
+    }, [workspaces])
+
+    useEffect(() => {
+        if (userId !== undefined && workspaceId !== undefined) {
+            dispatch(
+                tasksAsyncActions.getClockifyLastTimeEntries({
+                    userId,
+                    workspaceId,
+                }) as unknown as AnyAction,
+            )
+        }
+    }, [userId, workspaceId])
+
     return (
         <div className="tasks_list">
             <Task

@@ -11,6 +11,7 @@ import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { msalInstance } from './core/auth/authProvider'
 import { AppRedirect, AppRoutes } from './routes'
 import { buildStore } from './store'
+import { ClockifyInitialData } from './view/components/app/ClockifyInitialData'
 import { CurrentUserSettings } from './view/components/app/CurrentUserSettings'
 import { RedirectUrlSanitizer } from './view/components/app/RedirectUrlSanitizer'
 
@@ -28,6 +29,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                     <RedirectUrlSanitizer />
                     <HashRouter>
                         <CurrentUserSettings />
+                        <ClockifyInitialData />
                         <Routes>
                             {AppRedirect.map((route, i: number) => (
                                 <Route

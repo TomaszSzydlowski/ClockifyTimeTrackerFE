@@ -1,4 +1,5 @@
-﻿import ls from 'localstorage-slim'
+﻿import axios from 'axios'
+import ls from 'localstorage-slim'
 import { FC, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -68,7 +69,10 @@ export const CurrentUserSettings: FC = () => {
     }, [isFirstRun])
 
     useEffect(() => {
-        if (clockifyApiKey !== undefined) setClockifyKeyInLocalStorage(clockifyApiKey)
+        if (clockifyApiKey !== undefined) {
+            axios.defaults.headers.common['X-Api-Key'] = clockifyApiKey
+            setClockifyKeyInLocalStorage(clockifyApiKey)
+        }
         if (azureDevOpsToken !== undefined)
             setAzureDevOpsTokenInLocalStorage(azureDevOpsToken)
     }, [azureDevOpsToken, clockifyApiKey])
