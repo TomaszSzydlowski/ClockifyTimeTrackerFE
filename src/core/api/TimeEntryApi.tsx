@@ -24,4 +24,21 @@ export default class TimeEntryApi {
             },
         }))
     }
+
+    static async startTracking(
+        workspaceId: string,
+        projectId: string,
+        taskId: string,
+    ): Promise<void> {
+        const { data } = await HttpClient.post(
+            endpoints.timeEntry.startTracking(workspaceId),
+            {
+                start: dayjs().toDate(),
+                billable: true,
+                description: '',
+                projectId: projectId,
+                taskId: taskId,
+            },
+        )
+    }
 }

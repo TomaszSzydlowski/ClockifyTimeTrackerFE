@@ -2,6 +2,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import TimeEntryApi from '../../../core/api/TimeEntryApi'
 import { ProjectView } from '../../../core/types/Project'
 import { lastTimeEntriesAsyncActions } from '../../../store/features/clockify/last-time-entries/asyncActions'
 import { lastTimeEntriesSelectors } from '../../../store/features/clockify/last-time-entries/selectors'
@@ -92,8 +93,10 @@ export const Tasks: FC = () => {
     }, [lastTimeEntries, tasks, projects])
 
     const [quickActionTask, setQuickActionTask] = useState<QuickActionTask[]>([])
-    const handleStartClick = (projectId: string, workspaceId: string) => {
-        return console.log(`start: ${projectId}, ${workspaceId}`)
+    const handleStartClick = async (projectId: string, taskId: string) => {
+        console.log(`start: ${projectId}, ${workspaceId}`)
+        if (!workspaceId) return console.error('missing workspaceId')
+        await TimeEntryApi.startTracking(workspaceId, projectId, taskId)
     }
     const handlePauseClick = (projectId: string, workspaceId: string) => {
         return console.log(`pause: ${projectId}, ${workspaceId}`)
