@@ -1,6 +1,11 @@
 ﻿import { configureStore } from '@reduxjs/toolkit'
 
 import {
+    projectsDefaultValueProvider,
+    projectsSlice,
+    projectsStoreModel,
+} from './features/clockify/projects'
+import {
     tasksDefaultValueProvider,
     tasksSlice,
     tasksStoreModel,
@@ -32,6 +37,7 @@ export interface StoreModel {
     clockifyUser: userStoreModel
     clockifyWorkspaces: workspacesStoreModel
     clockifyTasks: tasksStoreModel
+    clockifyProjects: projectsStoreModel
 }
 
 const prepareServerDataToStore = (): StoreModel => ({
@@ -40,6 +46,7 @@ const prepareServerDataToStore = (): StoreModel => ({
     clockifyUser: userDefaultValueProvider(),
     clockifyWorkspaces: workspacesDefaultValueProvider(),
     clockifyTasks: tasksDefaultValueProvider(),
+    clockifyProjects: projectsDefaultValueProvider(),
 })
 
 const store = configureStore({
@@ -49,6 +56,7 @@ const store = configureStore({
         clockifyUser: userSlice.reducer,
         clockifyWorkspaces: workspacesSlice.reducer,
         clockifyTasks: tasksSlice.reducer,
+        clockifyProjects: projectsSlice.reducer,
     },
     preloadedState: prepareServerDataToStore(),
     middleware: (defaultMiddleware) => defaultMiddleware({ serializableCheck: false }),

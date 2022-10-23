@@ -2,7 +2,7 @@
 // @ts-ignore
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
-import { UpdateRequestBase } from '../types/core'
+import { UpdateRequestBase } from '../types/Core'
 import { HttpMethod } from '../types/enums/HttpMethod'
 
 export default class HttpClient {

@@ -7,6 +7,10 @@ export const endpoints = {
     workspace: {
         get: `${clockifyBaseApi}/workspaces`,
     },
+    projects: {
+        get: (workspaceId: string) =>
+            `${clockifyBaseApi}/workspaces/${workspaceId}/projects`,
+    },
     timeEntry: {
         get: (workspaceId: string, userId: string) =>
             `${clockifyBaseApi}/workspaces/${workspaceId}/user/${userId}/time-entries`,

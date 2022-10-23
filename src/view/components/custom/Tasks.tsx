@@ -2,6 +2,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { useClockifyWorkspaceId } from '../../../core/hooks/useIdToken'
 import { tasksAsyncActions } from '../../../store/features/clockify/tasks/asyncActions'
 import { tasksSelectors } from '../../../store/features/clockify/tasks/selectors'
 import { userClockifySelectors } from '../../../store/features/clockify/user/selectors'
@@ -13,13 +14,7 @@ export const Tasks: FC = () => {
     const dispatch = useDispatch()
     const tasks = useSelector(tasksSelectors.getLastTimeEntries)
     const userId = useSelector(userClockifySelectors.getUserId)
-    const workspaces = useSelector(workspacesClockifySelectors.getWorkspaces)
-
-    const [workspaceId, setWorkspaceId] = useState<string | undefined>(undefined)
-
-    useEffect(() => {
-        if (workspaces !== undefined) setWorkspaceId(workspaces[0].id)
-    }, [workspaces])
+    const workspaceId = useClockifyWorkspaceId()
 
     useEffect(() => {
         if (userId !== undefined && workspaceId !== undefined) {
