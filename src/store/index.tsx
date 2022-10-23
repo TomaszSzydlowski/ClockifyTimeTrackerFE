@@ -11,6 +11,11 @@ import {
     projectsStoreModel,
 } from './features/clockify/projects'
 import {
+    tasksDefaultValueProvider,
+    tasksSlice,
+    tasksStoreModel,
+} from './features/clockify/tasks'
+import {
     userDefaultValueProvider,
     userSlice,
     userStoreModel,
@@ -32,6 +37,7 @@ export interface StoreModel {
     clockifyUser: userStoreModel
     clockifyLastTimeEntries: lastTimeEntriesStoreModel
     clockifyProjects: projectsStoreModel
+    clockifyTasks: tasksStoreModel
 }
 
 const prepareServerDataToStore = (): StoreModel => ({
@@ -40,6 +46,7 @@ const prepareServerDataToStore = (): StoreModel => ({
     clockifyUser: userDefaultValueProvider(),
     clockifyLastTimeEntries: lastTimeEntriesDefaultValueProvider(),
     clockifyProjects: projectsDefaultValueProvider(),
+    clockifyTasks: tasksDefaultValueProvider(),
 })
 
 const store = configureStore({
@@ -49,6 +56,7 @@ const store = configureStore({
         clockifyUser: userSlice.reducer,
         clockifyLastTimeEntries: lastTimeEntriesSlice.reducer,
         clockifyProjects: projectsSlice.reducer,
+        clockifyTasks: tasksSlice.reducer,
     },
     preloadedState: prepareServerDataToStore(),
     middleware: (defaultMiddleware) => defaultMiddleware({ serializableCheck: false }),

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { lastTimeEntriesAsyncActions } from '../../../store/features/clockify/last-time-entries/asyncActions'
 import { lastTimeEntriesSelectors } from '../../../store/features/clockify/last-time-entries/selectors'
+import { tasksAsyncActions } from '../../../store/features/clockify/tasks/asyncActions'
 import { userClockifySelectors } from '../../../store/features/clockify/user/selectors'
 import { Task } from './Task'
 
@@ -12,7 +13,14 @@ export const Tasks: FC = () => {
     const lastTimeEntries = useSelector(lastTimeEntriesSelectors.getLastTimeEntries)
     const userId = useSelector(userClockifySelectors.getUserId)
     const workspaceId = useSelector(userClockifySelectors.getDefaultWorkspaceId)
-
+    //6
+    console.log(
+        lastTimeEntries!.map((l) => l.projectId).filter((v, i, a) => a.indexOf(v) === i),
+    )
+    //9
+    console.log(
+        lastTimeEntries!.map((l) => l.taskId).filter((v, i, a) => a.indexOf(v) === i),
+    )
     useEffect(() => {
         if (userId !== undefined && workspaceId !== undefined) {
             dispatch(
@@ -23,6 +31,24 @@ export const Tasks: FC = () => {
             )
         }
     }, [userId, workspaceId])
+
+    useEffect(() => {
+        if (
+            workspaceId !== undefined &&
+            lastTimeEntries !== undefined &&
+            lastTimeEntries.length > 0
+        ) {
+            const uniqueProjectsIds = lastTimeEntries
+                .map((l) => l.projectId)
+                .filter((v, i, a) => a.indexOf(v) === i)
+            dispatch(
+                tasksAsyncActions.getClockifyTasksForProjectsIds({
+                    workspaceId,
+                    projectsIds: uniqueProjectsIds,
+                }) as unknown as AnyAction,
+            )
+        }
+    }, [lastTimeEntries])
 
     return (
         <div className="tasks_list">

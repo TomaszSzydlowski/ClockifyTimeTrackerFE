@@ -13,7 +13,7 @@ export default class TimeEntryApi {
         return data.map((timeEntryRaw) => ({
             id: timeEntryRaw.id,
             description: timeEntryRaw.description,
-            projectId: timeEntryRaw.description,
+            projectId: timeEntryRaw.projectId,
             taskId: timeEntryRaw.taskId,
             workspaceId: timeEntryRaw.workspaceId,
             userId: timeEntryRaw.userId,
