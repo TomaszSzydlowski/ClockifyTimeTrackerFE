@@ -11,7 +11,12 @@ export default class TimeEntryApi {
         )
 
         return data.map((timeEntryRaw) => ({
-            ...timeEntryRaw,
+            id: timeEntryRaw.id,
+            description: timeEntryRaw.description,
+            projectId: timeEntryRaw.description,
+            taskId: timeEntryRaw.taskId,
+            workspaceId: timeEntryRaw.workspaceId,
+            userId: timeEntryRaw.userId,
             timeInterval: {
                 ...timeEntryRaw.timeInterval,
                 start: dayjs(timeEntryRaw.timeInterval.start),

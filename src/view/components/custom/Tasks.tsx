@@ -3,23 +3,21 @@ import React, { FC, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { useClockifyWorkspaceId } from '../../../core/hooks/useIdToken'
-import { tasksAsyncActions } from '../../../store/features/clockify/tasks/asyncActions'
-import { tasksSelectors } from '../../../store/features/clockify/tasks/selectors'
+import { lastTimeEntriesAsyncActions } from '../../../store/features/clockify/last-time-entries/asyncActions'
+import { lastTimeEntriesSelectors } from '../../../store/features/clockify/last-time-entries/selectors'
 import { userClockifySelectors } from '../../../store/features/clockify/user/selectors'
-import { workspacesClockifySelectors } from '../../../store/features/clockify/workspaces/selectors'
-import { userSecretsSelectors } from '../../../store/features/user-secrets/selectors'
 import { Task } from './Task'
 
 export const Tasks: FC = () => {
     const dispatch = useDispatch()
-    const tasks = useSelector(tasksSelectors.getLastTimeEntries)
+    const lastTimeEntries = useSelector(lastTimeEntriesSelectors.getLastTimeEntries)
     const userId = useSelector(userClockifySelectors.getUserId)
     const workspaceId = useClockifyWorkspaceId()
 
     useEffect(() => {
         if (userId !== undefined && workspaceId !== undefined) {
             dispatch(
-                tasksAsyncActions.getClockifyLastTimeEntries({
+                lastTimeEntriesAsyncActions.getClockifyLastTimeEntries({
                     userId,
                     workspaceId,
                 }) as unknown as AnyAction,

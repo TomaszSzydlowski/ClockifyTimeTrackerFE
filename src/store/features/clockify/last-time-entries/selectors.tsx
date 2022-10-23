@@ -1,7 +1,7 @@
 import { TimeEntryView } from '../../../../core/types/TimeEntry'
 import { StoreModel } from '../../../index'
 
-export const tasksSelectors = {
+export const lastTimeEntriesSelectors = {
     getLastTimeEntries: (state: StoreModel): TimeEntryView[] | undefined =>
-        state.clockifyTasks.timeEntries,
+        state.clockifyLastTimeEntries.timeEntries,
 }

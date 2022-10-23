@@ -25,6 +25,12 @@ export interface TimeIntervalView {
     start: Dayjs
 }
 
-export interface TimeEntryView extends Omit<TimeEntryRaw, 'timeInterval'> {
+export interface TimeEntryView {
+    id: string
+    description: string
+    projectId: string
+    taskId: string
+    userId: string
+    workspaceId: string
     timeInterval: TimeIntervalView
 }

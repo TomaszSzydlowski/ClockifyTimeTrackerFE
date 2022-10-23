@@ -1,15 +1,15 @@
 ﻿import { configureStore } from '@reduxjs/toolkit'
 
 import {
+    lastTimeEntriesDefaultValueProvider,
+    lastTimeEntriesSlice,
+    lastTimeEntriesStoreModel,
+} from './features/clockify/last-time-entries'
+import {
     projectsDefaultValueProvider,
     projectsSlice,
     projectsStoreModel,
 } from './features/clockify/projects'
-import {
-    tasksDefaultValueProvider,
-    tasksSlice,
-    tasksStoreModel,
-} from './features/clockify/tasks'
 import {
     userDefaultValueProvider,
     userSlice,
@@ -36,7 +36,7 @@ export interface StoreModel {
     userSecrets: userSecretsStoreModel
     clockifyUser: userStoreModel
     clockifyWorkspaces: workspacesStoreModel
-    clockifyTasks: tasksStoreModel
+    clockifyLastTimeEntries: lastTimeEntriesStoreModel
     clockifyProjects: projectsStoreModel
 }
 
@@ -45,7 +45,7 @@ const prepareServerDataToStore = (): StoreModel => ({
     userSecrets: userSecretsDefaultValueProvider(),
     clockifyUser: userDefaultValueProvider(),
     clockifyWorkspaces: workspacesDefaultValueProvider(),
-    clockifyTasks: tasksDefaultValueProvider(),
+    clockifyLastTimeEntries: lastTimeEntriesDefaultValueProvider(),
     clockifyProjects: projectsDefaultValueProvider(),
 })
 
@@ -55,7 +55,7 @@ const store = configureStore({
         userSecrets: userSecretsSlice.reducer,
         clockifyUser: userSlice.reducer,
         clockifyWorkspaces: workspacesSlice.reducer,
-        clockifyTasks: tasksSlice.reducer,
+        clockifyLastTimeEntries: lastTimeEntriesSlice.reducer,
         clockifyProjects: projectsSlice.reducer,
     },
     preloadedState: prepareServerDataToStore(),
