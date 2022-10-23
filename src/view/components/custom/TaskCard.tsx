@@ -8,18 +8,25 @@ export interface projectTag {
 }
 
 interface TaskCardProps {
-    title: string
+    description?: string
     projectTags: projectTag[]
+    onStartClick: () => void
+    onPauseClick: () => void
 }
 
-export const TaskCard: FC<TaskCardProps> = ({ title, projectTags }) => {
+export const TaskCard: FC<TaskCardProps> = ({
+    description,
+    projectTags,
+    onPauseClick,
+    onStartClick,
+}) => {
     const [isActive, setIsActive] = useState(false)
     return (
         <div className="task_box">
             <Card>
                 <Row>
                     <Col span={20} className="task_box_description">
-                        <div className="task_box_description__task">{title}</div>
+                        <div className="task_box_description__task">{description}</div>
                         <div className="task_box_description__tags">
                             {projectTags.map(({ text, color }, index) => (
                                 <Tag key={index} color={color}>
@@ -33,7 +40,10 @@ export const TaskCard: FC<TaskCardProps> = ({ title, projectTags }) => {
                             shape="circle"
                             icon={isActive ? <PauseOutlined /> : <CaretRightOutlined />}
                             className="task_box__action--button"
-                            onClick={() => setIsActive(!isActive)}
+                            onClick={() => {
+                                isActive ? onPauseClick() : onStartClick()
+                                setIsActive(!isActive)
+                            }}
                         />
                     </Col>
                 </Row>
