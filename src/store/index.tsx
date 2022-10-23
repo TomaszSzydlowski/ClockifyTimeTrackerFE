@@ -16,11 +16,6 @@ import {
     userStoreModel,
 } from './features/clockify/user'
 import {
-    workspacesDefaultValueProvider,
-    workspacesSlice,
-    workspacesStoreModel,
-} from './features/clockify/workspaces'
-import {
     modalDefaultValueProvider,
     modalSlice,
     ModalStoreModel,
@@ -35,7 +30,6 @@ export interface StoreModel {
     modal: ModalStoreModel
     userSecrets: userSecretsStoreModel
     clockifyUser: userStoreModel
-    clockifyWorkspaces: workspacesStoreModel
     clockifyLastTimeEntries: lastTimeEntriesStoreModel
     clockifyProjects: projectsStoreModel
 }
@@ -44,7 +38,6 @@ const prepareServerDataToStore = (): StoreModel => ({
     modal: modalDefaultValueProvider(),
     userSecrets: userSecretsDefaultValueProvider(),
     clockifyUser: userDefaultValueProvider(),
-    clockifyWorkspaces: workspacesDefaultValueProvider(),
     clockifyLastTimeEntries: lastTimeEntriesDefaultValueProvider(),
     clockifyProjects: projectsDefaultValueProvider(),
 })
@@ -54,7 +47,6 @@ const store = configureStore({
         modal: modalSlice.reducer,
         userSecrets: userSecretsSlice.reducer,
         clockifyUser: userSlice.reducer,
-        clockifyWorkspaces: workspacesSlice.reducer,
         clockifyLastTimeEntries: lastTimeEntriesSlice.reducer,
         clockifyProjects: projectsSlice.reducer,
     },
