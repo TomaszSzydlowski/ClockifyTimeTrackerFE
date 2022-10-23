@@ -6,7 +6,7 @@ const { CheckableTag } = Tag
 const tagsData = ['Yours', 'Current sprint', 'Solvti']
 
 export const HeaderContent: FC = () => {
-    const [selectedTags, setSelectedTags] = useState<string[]>(['Yours'])
+    const [selectedTags, setSelectedTags] = useState<string[]>([])
 
     const handleChange = (tag: string, checked: boolean) => {
         const nextSelectedTags = checked
