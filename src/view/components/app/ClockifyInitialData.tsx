@@ -7,7 +7,6 @@ import { YOURS_PROJECTS } from '../../../core/consts/consts'
 import { ModalType } from '../../../core/types/enums/ModalType'
 import { projectsAsyncActions } from '../../../store/features/clockify/projects/asyncActions'
 import { projectsClockifySelectors } from '../../../store/features/clockify/projects/selectors'
-import { tasksAsyncActions } from '../../../store/features/clockify/tasks/asyncActions'
 import { userAsyncActions } from '../../../store/features/clockify/user/asyncActions'
 import { userClockifySelectors } from '../../../store/features/clockify/user/selectors'
 import { yoursProjectsActions } from '../../../store/features/clockify/yours-projects'
@@ -54,14 +53,8 @@ export const ClockifyInitialData: FC = () => {
     }, [yoursProjects, projects])
 
     useEffect(() => {
-        if (workspaceId !== undefined && yoursProjects !== undefined) {
+        if (yoursProjects !== undefined) {
             dispatch(yoursProjectsActions.setYoursProjects(yoursProjects as string[]))
-            dispatch(
-                tasksAsyncActions.getClockifyTasksForProjectsIds({
-                    workspaceId,
-                    projectsIds: yoursProjects as string[],
-                }) as unknown as AnyAction,
-            )
         }
     }, [yoursProjects])
 

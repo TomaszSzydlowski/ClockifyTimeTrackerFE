@@ -9,7 +9,7 @@ export const endpoints = {
     },
     projects: {
         get: (workspaceId: string) =>
-            `${clockifyBaseApi}/workspaces/${workspaceId}/projects`,
+            `${clockifyBaseApi}/workspaces/${workspaceId}/projects?hydrated=true&page-size=5000`,
     },
     tasks: {
         get: (workspaceId: string, projectId: string) =>

@@ -12,6 +12,12 @@ export default class ClockifyProjectApi {
             id: projectRaw.id,
             name: projectRaw.name,
             color: projectRaw.color,
+            tasks: projectRaw.tasks.map((taskRaw) => ({
+                id: taskRaw.id,
+                name: taskRaw.name,
+                projectId: taskRaw.projectId,
+                status: taskRaw.status,
+            })),
         }))
     }
 }

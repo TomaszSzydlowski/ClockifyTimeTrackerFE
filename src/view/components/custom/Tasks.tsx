@@ -4,11 +4,10 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import TimeEntryApi from '../../../core/api/TimeEntryApi'
 import { ProjectView } from '../../../core/types/Project'
+import { TimeEntryView } from '../../../core/types/TimeEntry'
 import { lastTimeEntriesAsyncActions } from '../../../store/features/clockify/last-time-entries/asyncActions'
 import { lastTimeEntriesSelectors } from '../../../store/features/clockify/last-time-entries/selectors'
 import { projectsClockifySelectors } from '../../../store/features/clockify/projects/selectors'
-import { tasksAsyncActions } from '../../../store/features/clockify/tasks/asyncActions'
-import { tasksClockifySelectors } from '../../../store/features/clockify/tasks/selectors'
 import { userClockifySelectors } from '../../../store/features/clockify/user/selectors'
 import { projectTag, TaskCard } from './TaskCard'
 
@@ -17,7 +16,6 @@ export const Tasks: FC = () => {
     const lastTimeEntries = useSelector(lastTimeEntriesSelectors.getLastTimeEntries)
     const userId = useSelector(userClockifySelectors.getUserId)
     const workspaceId = useSelector(userClockifySelectors.getDefaultWorkspaceId)
-    const tasks = useSelector(tasksClockifySelectors.getTasks)
     const projects = useSelector(projectsClockifySelectors.getprojects)
 
     useEffect(() => {
@@ -41,12 +39,21 @@ export const Tasks: FC = () => {
         }))
     }
 
+    const getTaskDescription = (
+        lastTimeEntry: TimeEntryView,
+        project?: ProjectView,
+    ): string | undefined => {
+        if (!project) {
+            console.error('Project do not exist for time entry')
+            return undefined
+        }
+        return project.tasks.find((task) => task.id === lastTimeEntry.taskId)?.name
+    }
+
     useEffect(() => {
         if (
             lastTimeEntries !== undefined &&
             lastTimeEntries.length > 0 &&
-            tasks !== undefined &&
-            tasks.length > 0 &&
             projects !== undefined &&
             projects.length > 0
         ) {
@@ -59,8 +66,12 @@ export const Tasks: FC = () => {
                     ),
                     taskId: lastTimeEntry.taskId,
                     projectId: lastTimeEntry.projectId,
-                    description: tasks.find((task) => task.id === lastTimeEntry.taskId)
-                        ?.name,
+                    description: getTaskDescription(
+                        lastTimeEntry,
+                        projects.find(
+                            (project) => project.id === lastTimeEntry.projectId,
+                        ),
+                    ),
                 }),
             )
 
@@ -72,7 +83,7 @@ export const Tasks: FC = () => {
 
             setQuickActionTask(newQuickActionTasksUnique)
         }
-    }, [lastTimeEntries, tasks, projects])
+    }, [lastTimeEntries, projects])
 
     const [quickActionTask, setQuickActionTask] = useState<QuickActionTask[]>([])
     const handleStartClick = async (projectId: string, taskId: string) => {

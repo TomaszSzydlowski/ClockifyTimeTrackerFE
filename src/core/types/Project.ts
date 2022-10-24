@@ -76,4 +76,12 @@ export interface ProjectView {
     id: string
     name: string
     color: string
+    tasks: TaskView[]
+}
+
+interface TaskView {
+    id: string
+    name: string
+    projectId: string
+    status: string
 }
