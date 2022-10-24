@@ -29,6 +29,17 @@ export const Tasks: FC = () => {
         }
     }, [userId, workspaceId])
 
+    useEffect(() => {
+        if (
+            lastTimeEntries !== undefined &&
+            lastTimeEntries.length > 0 &&
+            projects !== undefined &&
+            projects.length > 0
+        ) {
+            createQuickActionTask(lastTimeEntries, mapToTags, projects)
+        }
+    }, [lastTimeEntries, projects])
+
     const mapToTags = (project?: ProjectView): projectTag[] => {
         if (!project) return []
 
@@ -37,6 +48,34 @@ export const Tasks: FC = () => {
             text: tag,
             color: project.color,
         }))
+    }
+
+    const createQuickActionTask = (
+        lastTimeEntries: TimeEntryView[],
+        mapToTags: (project?: ProjectView) => projectTag[],
+        projects: ProjectView[],
+    ) => {
+        const newQuickActionTasks: QuickActionTask[] = lastTimeEntries.map(
+            (lastTimeEntry) => ({
+                tags: mapToTags(
+                    projects.find((project) => project.id === lastTimeEntry.projectId),
+                ),
+                taskId: lastTimeEntry.taskId,
+                projectId: lastTimeEntry.projectId,
+                description: getTaskDescription(
+                    lastTimeEntry,
+                    projects.find((project) => project.id === lastTimeEntry.projectId),
+                ),
+            }),
+        )
+
+        const newQuickActionTasksUnique = newQuickActionTasks.filter(
+            (value, index, self) => {
+                return self.findIndex((v) => v.taskId === value.taskId) === index
+            },
+        )
+
+        setQuickActionTask(newQuickActionTasksUnique)
     }
 
     const getTaskDescription = (
@@ -49,41 +88,6 @@ export const Tasks: FC = () => {
         }
         return project.tasks.find((task) => task.id === lastTimeEntry.taskId)?.name
     }
-
-    useEffect(() => {
-        if (
-            lastTimeEntries !== undefined &&
-            lastTimeEntries.length > 0 &&
-            projects !== undefined &&
-            projects.length > 0
-        ) {
-            const newQuickActionTasks: QuickActionTask[] = lastTimeEntries.map(
-                (lastTimeEntry) => ({
-                    tags: mapToTags(
-                        projects.find(
-                            (project) => project.id === lastTimeEntry.projectId,
-                        ),
-                    ),
-                    taskId: lastTimeEntry.taskId,
-                    projectId: lastTimeEntry.projectId,
-                    description: getTaskDescription(
-                        lastTimeEntry,
-                        projects.find(
-                            (project) => project.id === lastTimeEntry.projectId,
-                        ),
-                    ),
-                }),
-            )
-
-            const newQuickActionTasksUnique = newQuickActionTasks.filter(
-                (value, index, self) => {
-                    return self.findIndex((v) => v.taskId === value.taskId) === index
-                },
-            )
-
-            setQuickActionTask(newQuickActionTasksUnique)
-        }
-    }, [lastTimeEntries, projects])
 
     const [quickActionTask, setQuickActionTask] = useState<QuickActionTask[]>([])
     const handleStartClick = async (projectId: string, taskId: string) => {
