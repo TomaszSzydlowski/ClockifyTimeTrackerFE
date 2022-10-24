@@ -5,10 +5,12 @@ import { ModalType } from '../../../core/types/enums/ModalType'
 import { modalSelectors } from '../../../store/features/modals/modal/selectors'
 import { ConfirmModal } from './ConfirmModal'
 import { UserSecretsModal } from './UserSecretsModal'
+import { YoursProjectsModal } from './YoursProjectsModal'
 
 const modalsTypes = {
     [ModalType.ConfirmModal]: ConfirmModal,
     [ModalType.UserSecretsModal]: UserSecretsModal,
+    [ModalType.YoursProjectsModal]: YoursProjectsModal,
 }
 
 export const ModalContainer: FC = () => {

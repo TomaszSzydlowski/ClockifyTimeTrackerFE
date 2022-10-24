@@ -3,10 +3,10 @@ import React, { FC, useState } from 'react'
 
 const { CheckableTag } = Tag
 
-const tagsData = ['Yours', 'Current sprint', 'Solvti']
+const tagsData = ['Yours', 'Current sprint', 'Last Task']
 
 export const HeaderContent: FC = () => {
-    const [selectedTags, setSelectedTags] = useState<string[]>([])
+    const [selectedTags, setSelectedTags] = useState<string[]>(['Last Task'])
 
     const handleChange = (tag: string, checked: boolean) => {
         const nextSelectedTags = checked

@@ -31,24 +31,6 @@ export const Tasks: FC = () => {
         }
     }, [userId, workspaceId])
 
-    useEffect(() => {
-        if (
-            workspaceId !== undefined &&
-            lastTimeEntries !== undefined &&
-            lastTimeEntries.length > 0
-        ) {
-            const uniqueProjectsIds = lastTimeEntries
-                .map((l) => l.projectId)
-                .filter((v, i, a) => a.indexOf(v) === i)
-            dispatch(
-                tasksAsyncActions.getClockifyTasksForProjectsIds({
-                    workspaceId,
-                    projectsIds: uniqueProjectsIds,
-                }) as unknown as AnyAction,
-            )
-        }
-    }, [lastTimeEntries])
-
     const mapToTags = (project?: ProjectView): projectTag[] => {
         if (!project) return []
 

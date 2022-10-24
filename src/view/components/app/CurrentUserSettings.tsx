@@ -26,14 +26,9 @@ export const CurrentUserSettings: FC = () => {
     const setAzureDevOpsTokenInLocalStorage = (value: string) =>
         ls.set(AZURE_DEV_OPS_TOKEN, value, { encrypt: true })
 
-    const handleSave = () => dispatch(modalActions.hideModal())
-    const handleDontSave = () => dispatch(modalActions.hideModal())
-
     const UserSecretsModalProps: BaseModalProps = {
         title: 'Please provide keys',
         description: 'Keys will be store in your browser as encrypt values',
-        onSave: handleSave,
-        onDontSave: handleDontSave,
     }
 
     const shouldDisplayModal = () =>
