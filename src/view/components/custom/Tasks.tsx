@@ -43,7 +43,7 @@ export const Tasks: FC = () => {
     const mapToTags = (project?: ProjectView): projectTag[] => {
         if (!project) return []
 
-        const tagsDescription = project.name.split(' - ')
+        const tagsDescription = project.name.replace(/\B\- #\w+/, '').split(' - ')
         return tagsDescription.map((tag) => ({
             text: tag,
             color: project.color,
