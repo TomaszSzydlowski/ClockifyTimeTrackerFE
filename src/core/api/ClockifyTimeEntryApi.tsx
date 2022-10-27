@@ -40,7 +40,19 @@ export default class TimeEntryApi {
                 taskId: taskId,
             },
         )
-        return data
+        return {
+            id: data.id,
+            description: data.description,
+            projectId: data.projectId,
+            taskId: data.taskId,
+            workspaceId: data.workspaceId,
+            userId: data.userId,
+            timeInterval: {
+                ...data.timeInterval,
+                start: dayjs(data.timeInterval.start),
+                end: dayjs(data.timeInterval.end),
+            },
+        }
     }
 
     static async stopTracking(
@@ -53,7 +65,19 @@ export default class TimeEntryApi {
                 end: dayjs().toDate(),
             },
         )
-        return data
+        return {
+            id: data.id,
+            description: data.description,
+            projectId: data.projectId,
+            taskId: data.taskId,
+            workspaceId: data.workspaceId,
+            userId: data.userId,
+            timeInterval: {
+                ...data.timeInterval,
+                start: dayjs(data.timeInterval.start),
+                end: dayjs(data.timeInterval.end),
+            },
+        }
     }
 
     static async getInProgressTimeEntry(

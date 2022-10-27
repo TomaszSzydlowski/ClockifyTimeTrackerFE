@@ -14,6 +14,7 @@ import { buildStore } from './store'
 import { ClockifyInitialData } from './view/components/app/ClockifyInitialData'
 import { CurrentUserSettings } from './view/components/app/CurrentUserSettings'
 import { RedirectUrlSanitizer } from './view/components/app/RedirectUrlSanitizer'
+import { TimeTrackingTabTitle } from './view/components/app/TimeTrackingTabTitle'
 
 const authRequest = { scopes: ['User.Read'] }
 
@@ -30,6 +31,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                     <HashRouter>
                         <CurrentUserSettings />
                         <ClockifyInitialData />
+                        <TimeTrackingTabTitle />
                         <Routes>
                             {AppRedirect.map((route, i: number) => (
                                 <Route
