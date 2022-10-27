@@ -21,7 +21,7 @@ export interface TimeIntervalRaw {
 
 export interface TimeIntervalView {
     duration: string
-    end: Dayjs
+    end?: Dayjs
     start: Dayjs
 }
 

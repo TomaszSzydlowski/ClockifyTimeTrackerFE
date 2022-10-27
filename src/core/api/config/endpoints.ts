@@ -18,6 +18,8 @@ export const endpoints = {
     timeEntry: {
         get: (workspaceId: string, userId: string) =>
             `${clockifyBaseApi}/workspaces/${workspaceId}/user/${userId}/time-entries`,
+        getInProgress: (workspaceId: string, userId: string) =>
+            `${clockifyBaseApi}/workspaces/${workspaceId}/user/${userId}/time-entries?in-progress=true`,
         startTracking: (workspaceId: string) =>
             `${clockifyBaseApi}/workspaces/${workspaceId}/time-entries`,
         stopTracking: (workspaceId: string, userId: string) =>

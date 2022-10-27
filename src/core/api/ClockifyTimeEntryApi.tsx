@@ -50,4 +50,29 @@ export default class TimeEntryApi {
             },
         )
     }
+
+    static async getInProgressTimeEntry(
+        workspaceId: string,
+        userId: string,
+    ): Promise<TimeEntryView | undefined> {
+        const { data } = await HttpClient.get<TimeEntryRaw[]>(
+            endpoints.timeEntry.getInProgress(workspaceId, userId),
+        )
+        if (data.length === 0) return undefined
+
+        const result = data.map((timeEntryRaw) => ({
+            id: timeEntryRaw.id,
+            description: timeEntryRaw.description,
+            projectId: timeEntryRaw.projectId,
+            taskId: timeEntryRaw.taskId,
+            workspaceId: timeEntryRaw.workspaceId,
+            userId: timeEntryRaw.userId,
+            timeInterval: {
+                ...timeEntryRaw.timeInterval,
+                start: dayjs(timeEntryRaw.timeInterval.start),
+                end: dayjs(timeEntryRaw.timeInterval.end),
+            },
+        }))
+        return result[0] //only one time entry can be track
+    }
 }

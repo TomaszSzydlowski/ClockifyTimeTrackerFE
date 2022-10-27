@@ -79,7 +79,7 @@ export interface ProjectView {
     tasks: TaskView[]
 }
 
-interface TaskView {
+export interface TaskView {
     id: string
     name: string
     projectId: string

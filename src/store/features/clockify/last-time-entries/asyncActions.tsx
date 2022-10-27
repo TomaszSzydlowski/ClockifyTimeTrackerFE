@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-import TimeEntryApi from '../../../../core/api/TimeEntryApi'
+import TimeEntryApi from '../../../../core/api/ClockifyTimeEntryApi'
 
 export const lastTimeEntriesAsyncActions = {
     getClockifyLastTimeEntries: createAsyncThunk(
