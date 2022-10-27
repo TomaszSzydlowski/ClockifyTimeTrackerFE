@@ -16,7 +16,6 @@ export const TimeTrackingTabTitle: FC = () => {
     const [startTime, setStartTime] = useState<Dayjs | undefined>(undefined)
     const [displayTime, setDisplayTime] = useState<DisplayTime | undefined>(undefined)
     const [intervalId, setIntervalId] = useState<number | undefined>(undefined)
-    const [lastTimeStart, setLastTimeStart] = useState<Dayjs | undefined>(undefined)
 
     useEffect(() => {
         if (!tracking) {
@@ -46,7 +45,6 @@ export const TimeTrackingTabTitle: FC = () => {
 
         const id = setInterval(() => {
             const diff = dayjs().diff(startTime, 's')
-            console.log(diff)
             if (diff === 0) return
             if (diff < 60) {
                 setDisplayTime({ second: diff, minutes: 0, hour: 0 })
