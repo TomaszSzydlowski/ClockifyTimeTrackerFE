@@ -12,4 +12,23 @@ export const trackingAsyncActions = {
             )
         },
     ),
+    startTracking: createAsyncThunk(
+        'tracking-clockify/startTracking',
+        async (payload: { workspaceId: string; projectId: string; taskId: string }) => {
+            return await ClockifyTimeEntryApi.startTracking(
+                payload.workspaceId,
+                payload.projectId,
+                payload.taskId,
+            )
+        },
+    ),
+    stopTracking: createAsyncThunk(
+        'tracking-clockify/stopTracking',
+        async (payload: { workspaceId: string; userId: string }) => {
+            return await ClockifyTimeEntryApi.stopTracking(
+                payload.workspaceId,
+                payload.userId,
+            )
+        },
+    ),
 }

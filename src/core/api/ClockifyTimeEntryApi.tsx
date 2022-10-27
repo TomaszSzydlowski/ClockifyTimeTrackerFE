@@ -29,8 +29,8 @@ export default class TimeEntryApi {
         workspaceId: string,
         projectId: string,
         taskId: string,
-    ): Promise<void> {
-        const { data } = await HttpClient.post(
+    ): Promise<TimeEntryView> {
+        const { data } = await HttpClient.post<TimeEntryView>(
             endpoints.timeEntry.startTracking(workspaceId),
             {
                 start: dayjs().toDate(),
@@ -40,15 +40,20 @@ export default class TimeEntryApi {
                 taskId: taskId,
             },
         )
+        return data
     }
 
-    static async stopTracking(workspaceId: string, userId: string): Promise<void> {
-        const { data } = await HttpClient.patch(
+    static async stopTracking(
+        workspaceId: string,
+        userId: string,
+    ): Promise<TimeEntryView> {
+        const { data } = await HttpClient.patch<TimeEntryView>(
             endpoints.timeEntry.stopTracking(workspaceId, userId),
             {
                 end: dayjs().toDate(),
             },
         )
+        return data
     }
 
     static async getInProgressTimeEntry(

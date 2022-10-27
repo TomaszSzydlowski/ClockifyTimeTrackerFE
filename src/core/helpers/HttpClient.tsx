@@ -10,11 +10,11 @@ export default class HttpClient {
         return HttpClient.makeRequest(HttpMethod.HEAD, url, {}, config)
     }
 
-    static post(
+    static post<TResponse>(
         url: string,
         formData = {},
         config: AxiosRequestConfig = {},
-    ): Promise<AxiosResponse> {
+    ): Promise<AxiosResponse<TResponse>> {
         return HttpClient.makeRequest(HttpMethod.POST, url, formData, config)
     }
 
@@ -47,11 +47,11 @@ export default class HttpClient {
         )
     }
 
-    static patch(
+    static patch<TResponse>(
         url: string,
         formData = {},
         config: AxiosRequestConfig = {},
-    ): Promise<AxiosResponse> {
+    ): Promise<AxiosResponse<TResponse>> {
         return HttpClient.makeRequest(HttpMethod.PATCH, url, formData, config)
     }
 

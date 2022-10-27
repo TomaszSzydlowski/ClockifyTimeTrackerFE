@@ -50,7 +50,7 @@ export const useQuickActionTasks = (): QuickActionTask[] => {
         ) {
             createQuickActionTask(lastTimeEntries, projects)
         }
-    }, [lastTimeEntries, projects])
+    }, [lastTimeEntries, projects, tracking])
 
     const mapToTags = (project?: ProjectView): projectTag[] => {
         if (!project) return []

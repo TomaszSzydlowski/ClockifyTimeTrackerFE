@@ -17,4 +17,10 @@ export const extraReducers = (
     builder.addCase(trackingAsyncActions.getClockifyTracking.rejected, (state) => {
         state.tracking = undefined
     })
+    builder.addCase(trackingAsyncActions.startTracking.fulfilled, (state, action) => {
+        state.tracking = action.payload
+    })
+    builder.addCase(trackingAsyncActions.stopTracking.fulfilled, (state, action) => {
+        state.tracking = undefined
+    })
 }
