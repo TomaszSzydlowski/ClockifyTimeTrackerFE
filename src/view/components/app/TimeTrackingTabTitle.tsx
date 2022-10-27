@@ -22,7 +22,6 @@ export const TimeTrackingTabTitle: FC = () => {
             setStartTime(undefined)
             return
         }
-        if (startTime) setLastTimeStart(startTime)
 
         const currentStartTime = tracking.timeInterval.start
         setStartTime(currentStartTime)
