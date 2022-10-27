@@ -23,18 +23,14 @@ export const TimeTrackingTabTitle: FC = () => {
             return
         }
 
-        const currentStartTime = tracking.timeInterval.start
-        setStartTime(currentStartTime)
+        setStartTime(tracking.timeInterval.start)
     }, [tracking])
 
     useEffect(() => {
-        console.log(intervalId, 'id')
-        console.log(startTime, 'startTime')
-        if (!startTime && intervalId !== undefined) {
+        if (intervalId !== undefined) {
             clearInterval(intervalId)
             setIntervalId(undefined)
             TabTitle('Clockify Time Tracker')
-            return
         }
 
         if (!startTime) {
