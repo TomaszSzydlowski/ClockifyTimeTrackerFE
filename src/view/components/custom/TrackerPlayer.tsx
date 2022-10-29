@@ -124,6 +124,7 @@ export const TrackerPlayer: FC = () => {
                 </Col>
                 <Col span={4} className="task_box__action">
                     <Button
+                        type="primary"
                         shape="circle"
                         icon={
                             tracking && !tracking.timeInterval.end ? (
