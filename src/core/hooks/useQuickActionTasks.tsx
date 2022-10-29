@@ -96,7 +96,7 @@ export const useQuickActionTasks = (): QuickActionTask[] => {
                     tags: mapToTags(project),
                     taskId: lastTimeEntry.taskId,
                     projectId: lastTimeEntry.projectId,
-                    description: getTaskDescription(task),
+                    description: getTaskDescription(task) ?? lastTimeEntry.description,
                     isTracking: checkIfIsTracking(project, task),
                 }
             },
