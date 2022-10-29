@@ -20,7 +20,9 @@ export default class TimeEntryApi {
             timeInterval: {
                 ...timeEntryRaw.timeInterval,
                 start: dayjs(timeEntryRaw.timeInterval.start),
-                end: dayjs(timeEntryRaw.timeInterval.end),
+                end: timeEntryRaw.timeInterval.end
+                    ? dayjs(timeEntryRaw.timeInterval.end)
+                    : undefined,
             },
         }))
     }
@@ -50,7 +52,7 @@ export default class TimeEntryApi {
             timeInterval: {
                 ...data.timeInterval,
                 start: dayjs(data.timeInterval.start),
-                end: dayjs(data.timeInterval.end),
+                end: data.timeInterval.end ? dayjs(data.timeInterval.end) : undefined,
             },
         }
     }
@@ -75,7 +77,7 @@ export default class TimeEntryApi {
             timeInterval: {
                 ...data.timeInterval,
                 start: dayjs(data.timeInterval.start),
-                end: dayjs(data.timeInterval.end),
+                end: data.timeInterval.end ? dayjs(data.timeInterval.end) : undefined,
             },
         }
     }
@@ -99,7 +101,9 @@ export default class TimeEntryApi {
             timeInterval: {
                 ...timeEntryRaw.timeInterval,
                 start: dayjs(timeEntryRaw.timeInterval.start),
-                end: dayjs(timeEntryRaw.timeInterval.end),
+                end: timeEntryRaw.timeInterval.end
+                    ? dayjs(timeEntryRaw.timeInterval.end)
+                    : undefined,
             },
         }))
         return result[0] //only one time entry can be track

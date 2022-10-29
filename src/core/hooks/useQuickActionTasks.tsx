@@ -63,9 +63,9 @@ export const useQuickActionTasks = (): QuickActionTask[] => {
         }))
     }
 
-    function checkIfIsTracking(project?: ProjectView, task?: TaskView) {
+    const checkIfIsTracking = (project?: ProjectView, task?: TaskView) => {
         if (tracking === undefined) return false
-
+        if (tracking.timeInterval.end) return false
         if (task === undefined) {
             if (
                 project !== undefined &&

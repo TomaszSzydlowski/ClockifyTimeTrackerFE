@@ -21,6 +21,6 @@ export const extraReducers = (
         state.tracking = action.payload
     })
     builder.addCase(trackingAsyncActions.stopTracking.fulfilled, (state, action) => {
-        state.tracking = undefined
+        state.tracking = action.payload
     })
 }

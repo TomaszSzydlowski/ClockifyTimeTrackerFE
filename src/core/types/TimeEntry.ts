@@ -15,7 +15,7 @@ export interface TimeEntryRaw {
 
 export interface TimeIntervalRaw {
     duration: string
-    end: Date
+    end?: Date
     start: Date
 }
 

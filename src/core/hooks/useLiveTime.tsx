@@ -6,20 +6,31 @@ import { trackingClockifySelectors } from '../../store/features/clockify/trackin
 import TimeService from '../services/TimeService'
 import { DisplayTime } from '../types/DisplayTime'
 
+interface TimeInterval {
+    start?: Dayjs
+    end?: Dayjs
+}
+
 export const useLiveTime = () => {
     const tracking = useSelector(trackingClockifySelectors.getTracking)
-    const [startTime, setStartTime] = useState<Dayjs | undefined>(undefined)
+    const [timeInterval, setTimeInterval] = useState<TimeInterval>({
+        start: undefined,
+        end: undefined,
+    })
     const [displayTime, setDisplayTime] = useState<DisplayTime | undefined>(undefined)
     const [intervalId, setIntervalId] = useState<NodeJS.Timer | undefined>(undefined)
     const [displayTimeView, setDisplayTimeView] = useState<string | undefined>(undefined)
 
     useEffect(() => {
         if (!tracking) {
-            setStartTime(undefined)
+            setTimeInterval({ start: undefined, end: undefined })
             return
         }
 
-        setStartTime(tracking.timeInterval.start)
+        setTimeInterval({
+            start: tracking.timeInterval.start,
+            end: tracking.timeInterval.end,
+        })
     }, [tracking])
 
     useEffect(() => {
@@ -28,18 +39,19 @@ export const useLiveTime = () => {
             setIntervalId(undefined)
         }
 
-        if (!startTime) {
+        if (!timeInterval.start) {
             setDisplayTime(undefined)
             return
         }
-
-        const id = setInterval(() => {
-            const diff = dayjs().diff(startTime, 's')
-            const displayTime = TimeService.getDisplayTabTitleTime(diff)
-            setDisplayTime(displayTime)
-        }, 1000)
-        setIntervalId(id)
-    }, [startTime])
+        if (!timeInterval.end) {
+            const id = setInterval(() => {
+                const diff = dayjs().diff(timeInterval.start, 's')
+                const displayTime = TimeService.getDisplayTabTitleTime(diff)
+                setDisplayTime(displayTime)
+            }, 1000)
+            setIntervalId(id)
+        }
+    }, [timeInterval])
 
     useEffect(() => {
         const displayTimeView = TimeService.getDisplayCurrentTimeView(displayTime)

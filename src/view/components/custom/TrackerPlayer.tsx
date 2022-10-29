@@ -44,12 +44,6 @@ export const TrackerPlayer: FC = () => {
                 taskId,
             }) as unknown as AnyAction,
         )
-        dispatch(
-            lastTimeEntriesAsyncActions.getClockifyLastTimeEntries({
-                userId,
-                workspaceId,
-            }) as unknown as AnyAction,
-        )
     }
     const handlePauseClick = async () => {
         if (!workspaceId) return console.error('missing workspaceId')
@@ -58,12 +52,6 @@ export const TrackerPlayer: FC = () => {
             trackingAsyncActions.stopTracking({
                 workspaceId,
                 userId,
-            }) as unknown as AnyAction,
-        )
-        dispatch(
-            lastTimeEntriesAsyncActions.getClockifyLastTimeEntries({
-                userId,
-                workspaceId,
             }) as unknown as AnyAction,
         )
     }
@@ -137,10 +125,16 @@ export const TrackerPlayer: FC = () => {
                 <Col span={4} className="task_box__action">
                     <Button
                         shape="circle"
-                        icon={tracking ? <PauseOutlined /> : <CaretRightOutlined />}
+                        icon={
+                            tracking && !tracking.timeInterval.end ? (
+                                <PauseOutlined />
+                            ) : (
+                                <CaretRightOutlined />
+                            )
+                        }
                         className="task_box__action--button"
                         onClick={() => {
-                            tracking
+                            tracking && !tracking.timeInterval.end
                                 ? handlePauseClick()
                                 : handleStartClick(
                                       playerInfo?.taskId || null,
