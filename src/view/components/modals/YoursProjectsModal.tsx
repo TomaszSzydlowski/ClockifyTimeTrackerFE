@@ -27,7 +27,7 @@ export const YoursProjectsModal: FC<BaseModalProps> = ({
     onDontSave,
 }) => {
     const dispatch = useDispatch()
-    const projects = useSelector(projectsClockifySelectors.getprojects)
+    const projects = useSelector(projectsClockifySelectors.getProjects)
     const hideModal = () => dispatch(modalActions.hideModal())
     const [yoursProjectsIds, setYoursProjectsIds] = useState<string[] | undefined>(
         undefined,

@@ -26,7 +26,7 @@ export const TrackerPlayer: FC = () => {
 
     const tracking = useSelector(trackingClockifySelectors.getTracking)
     const lastTimeEntries = useSelector(lastTimeEntriesSelectors.getLastTimeEntries)
-    const projects = useSelector(projectsClockifySelectors.getprojects)
+    const projects = useSelector(projectsClockifySelectors.getProjects)
     const userId = useSelector(userClockifySelectors.getUserId)
     const workspaceId = useSelector(userClockifySelectors.getDefaultWorkspaceId)
 

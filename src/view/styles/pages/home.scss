@@ -1,5 +1,25 @@
 ﻿.home_page_box {
   height: 100%;
-  &__swiper {
+
+  &_swiper {
+    padding: 8px 0;
+
+    &__content {
+      border: 2px solid black;
+
+      &--element {
+        border-radius: 4px;
+        padding: 12px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &-text {
+          font-size: 12px;
+
+        }
+      }
+    }
   }
 }

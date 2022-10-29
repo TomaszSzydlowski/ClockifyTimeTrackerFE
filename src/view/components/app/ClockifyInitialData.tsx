@@ -20,7 +20,7 @@ export const ClockifyInitialData: FC = () => {
     const clockifyApiKey = useSelector(userSecretsSelectors.getUserSecretsClockifyApiKey)
     const userId = useSelector(userClockifySelectors.getUserId)
     const workspaceId = useSelector(userClockifySelectors.getDefaultWorkspaceId)
-    const projects = useSelector(projectsClockifySelectors.getprojects)
+    const projects = useSelector(projectsClockifySelectors.getProjects)
     const yoursProjects = ls.get(YOURS_PROJECTS, { decrypt: true })
 
     const YoursProjectsModalProps: BaseModalProps = {

@@ -25,7 +25,7 @@ export const useQuickActionTasks = (): QuickActionTask[] => {
     const lastTimeEntries = useSelector(lastTimeEntriesSelectors.getLastTimeEntries)
     const userId = useSelector(userClockifySelectors.getUserId)
     const workspaceId = useSelector(userClockifySelectors.getDefaultWorkspaceId)
-    const projects = useSelector(projectsClockifySelectors.getprojects)
+    const projects = useSelector(projectsClockifySelectors.getProjects)
     const tracking = useSelector(trackingClockifySelectors.getTracking)
 
     const [quickActionTask, setQuickActionTask] = useState<QuickActionTask[]>([])
