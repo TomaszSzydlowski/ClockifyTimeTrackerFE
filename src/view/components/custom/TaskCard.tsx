@@ -12,7 +12,7 @@ interface TaskCardProps {
     projectTags: projectTag[]
     onStartClick: () => void
     onPauseClick: () => void
-    isNowTracking: boolean
+    isTracking: boolean
 }
 
 export const TaskCard: FC<TaskCardProps> = ({
@@ -20,14 +20,8 @@ export const TaskCard: FC<TaskCardProps> = ({
     projectTags,
     onPauseClick,
     onStartClick,
-    isNowTracking,
+    isTracking,
 }) => {
-    const [isTracking, setIsTracking] = useState(false)
-
-    useEffect(() => {
-        setIsTracking(isNowTracking)
-    }, [isNowTracking])
-
     return (
         <div className="task_box">
             <Card>
@@ -49,7 +43,6 @@ export const TaskCard: FC<TaskCardProps> = ({
                             className="task_box__action--button"
                             onClick={() => {
                                 isTracking ? onPauseClick() : onStartClick()
-                                setIsTracking(!isTracking)
                             }}
                         />
                     </Col>

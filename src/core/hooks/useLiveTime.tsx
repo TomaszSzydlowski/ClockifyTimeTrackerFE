@@ -42,27 +42,8 @@ export const useLiveTime = () => {
     }, [startTime])
 
     useEffect(() => {
-        if (!displayTime) {
-            setDisplayTimeView(undefined)
-            return
-        }
-        const second = displayTime.seconds
-            ? displayTime.seconds < 10 && displayTime.minutes !== 0
-                ? '0' + displayTime.seconds
-                : displayTime.seconds
-            : ''
-        const minutes = displayTime.minutes
-            ? displayTime.minutes < 10
-                ? '0' + displayTime.minutes + ':'
-                : displayTime.minutes + ':'
-            : ''
-        const hour = displayTime.hour
-            ? displayTime.hour < 10
-                ? '0' + displayTime.hour + ':'
-                : displayTime.hour + ':'
-            : ''
-        const unit = displayTime.hour ? 'h' : displayTime.minutes ? 'min' : 'sec'
-        setDisplayTimeView(`${hour}${minutes}${second} ${unit}`)
+        const displayTimeView = TimeService.getDisplayCurrentTimeView(displayTime)
+        setDisplayTimeView(displayTimeView)
     }, [displayTime])
 
     return { displayTime, displayTimeView }

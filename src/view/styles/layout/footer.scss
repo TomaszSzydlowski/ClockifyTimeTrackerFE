@@ -1,29 +1,90 @@
-﻿.footer_box {
-  display: flex;
-  justify-content: center;
-  height: 60px;
-  align-items: center;
-  color: gray;
-  
-  &__element {
-    padding-left: 12px;
-    padding-right: 12px;
+﻿@import "../varibales";
 
-    span {
-      display: block;
+.footer_box {
+  height: 120px;
+
+  .tracker_player {
+    height: 60px;
+    padding: 0 8px;
+
+    &_box {
+      padding: 8px 2px;
+
+      border-radius: 4px;
+      width: 100%;
+      background-color: $secondary-color;
+      height: 100%;
+
+      .ant-col {
+        height: 100%;
+        display: flex;
+        padding: 0 4px;
+      }
+
+      &__project-color {
+        margin: 0 4px;
+
+        &--content {
+          width: 2px;
+          height: 100%;
+        }
+      }
+
+      &_information {
+        width: 100%;
+        padding: 0 4px;
+        font-size: 12px;
+        margin: auto;
+
+        &__task_name {
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          width: 100%;
+        }
+
+        &_details {
+          width: 100%;
+          text-align: left;
+
+          &__timer {
+            padding: 0 4px;
+            display: block !important;
+            text-align: right;
+            font-weight: 700;
+          }
+        }
+      }
     }
+  }
 
-    .anticon {
-      font-size: 22px;
-    }
+  .footer_menu {
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: gray;
 
-    &--is-active {
-      color: white;
-    }
+    &__element {
+      padding-left: 16px;
+      padding-right: 16px;
 
-    &-description {
-      padding: 4px 0;
-      font-size: 12px;
+      span {
+        display: block;
+      }
+
+      .anticon {
+        font-size: 22px;
+      }
+
+      &--is-active {
+        color: white;
+      }
+
+      &-description {
+        padding: 4px 0;
+        font-size: 12px;
+      }
     }
   }
 }

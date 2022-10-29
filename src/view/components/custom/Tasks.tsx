@@ -50,7 +50,7 @@ export const Tasks: FC = () => {
                         )
                     }
                     onPauseClick={handlePauseClick}
-                    isNowTracking={quickActionTask.isTracking}
+                    isTracking={quickActionTask.isTracking}
                 />
             ))}
         </div>

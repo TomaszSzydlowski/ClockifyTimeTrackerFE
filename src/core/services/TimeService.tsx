@@ -23,4 +23,28 @@ export default class TimeService {
             hour: Math.floor(seconds / 3600),
         }
     }
+
+    static getDisplayCurrentTimeView = (
+        displayTime?: DisplayTime,
+    ): string | undefined => {
+        if (!displayTime) return undefined
+
+        const second = displayTime.seconds
+            ? displayTime.seconds < 10 && displayTime.minutes !== 0
+                ? '0' + displayTime.seconds
+                : displayTime.seconds
+            : ''
+        const minutes = displayTime.minutes
+            ? displayTime.minutes < 10
+                ? '0' + displayTime.minutes + ':'
+                : displayTime.minutes + ':'
+            : ''
+        const hour = displayTime.hour
+            ? displayTime.hour < 10
+                ? '0' + displayTime.hour + ':'
+                : displayTime.hour + ':'
+            : ''
+        const unit = displayTime.hour ? 'h' : displayTime.minutes ? 'min' : 'sec'
+        return `${hour}${minutes}${second} ${unit}`
+    }
 }

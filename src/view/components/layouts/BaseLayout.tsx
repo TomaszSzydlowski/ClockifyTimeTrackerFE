@@ -15,7 +15,7 @@ const { Header, Footer, Content } = Layout
 
 export const BaseLayout: FC<BaseLayoutProps> = ({
     headerHeight = 48,
-    footerHeight = 60,
+    footerHeight = 120,
     children,
 }) => {
     return (
