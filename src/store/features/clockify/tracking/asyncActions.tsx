@@ -14,7 +14,11 @@ export const trackingAsyncActions = {
     ),
     startTracking: createAsyncThunk(
         'tracking-clockify/startTracking',
-        async (payload: { workspaceId: string; projectId: string; taskId: string }) => {
+        async (payload: {
+            workspaceId: string
+            projectId: string
+            taskId: string | null
+        }) => {
             return await ClockifyTimeEntryApi.startTracking(
                 payload.workspaceId,
                 payload.projectId,
