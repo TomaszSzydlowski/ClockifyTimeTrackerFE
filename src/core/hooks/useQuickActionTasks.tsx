@@ -1,45 +1,21 @@
 ﻿import { AnyAction } from '@reduxjs/toolkit'
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
-import { lastTimeEntriesAsyncActions } from '../../store/features/clockify/last-time-entries/asyncActions'
 import { lastTimeEntriesSelectors } from '../../store/features/clockify/last-time-entries/selectors'
 import { projectsClockifySelectors } from '../../store/features/clockify/projects/selectors'
 import { trackingClockifySelectors } from '../../store/features/clockify/tracking/selectors'
-import { userClockifySelectors } from '../../store/features/clockify/user/selectors'
 import { projectTag } from '../../view/components/custom/TaskCard'
 import { ProjectView, TaskView } from '../types/Project'
+import { QuickActionTask } from '../types/QuickActionTask'
 import { TimeEntryView } from '../types/TimeEntry'
 
-interface QuickActionTask {
-    description?: string
-    tags: projectTag[]
-    taskId: string
-    projectId: string
-    isTracking: boolean
-}
-
 export const useQuickActionTasks = (): QuickActionTask[] => {
-    const dispatch = useDispatch()
-
     const lastTimeEntries = useSelector(lastTimeEntriesSelectors.getLastTimeEntries)
-    const userId = useSelector(userClockifySelectors.getUserId)
-    const workspaceId = useSelector(userClockifySelectors.getDefaultWorkspaceId)
     const projects = useSelector(projectsClockifySelectors.getProjects)
     const tracking = useSelector(trackingClockifySelectors.getTracking)
 
     const [quickActionTask, setQuickActionTask] = useState<QuickActionTask[]>([])
-
-    useEffect(() => {
-        if (userId !== undefined && workspaceId !== undefined) {
-            dispatch(
-                lastTimeEntriesAsyncActions.getClockifyLastTimeEntries({
-                    userId,
-                    workspaceId,
-                }) as unknown as AnyAction,
-            )
-        }
-    }, [userId, workspaceId])
 
     useEffect(() => {
         if (

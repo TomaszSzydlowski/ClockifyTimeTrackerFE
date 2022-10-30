@@ -2,9 +2,7 @@
 import React, { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import TimeEntryApi from '../../../core/api/ClockifyTimeEntryApi'
 import { useQuickActionTasks } from '../../../core/hooks/useQuickActionTasks'
-import { lastTimeEntriesAsyncActions } from '../../../store/features/clockify/last-time-entries/asyncActions'
 import { trackingAsyncActions } from '../../../store/features/clockify/tracking/asyncActions'
 import { userClockifySelectors } from '../../../store/features/clockify/user/selectors'
 import { TaskCard } from './TaskCard'

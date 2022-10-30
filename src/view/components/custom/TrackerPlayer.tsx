@@ -5,7 +5,6 @@ import React, { FC, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { useLiveTime } from '../../../core/hooks/useLiveTime'
-import { lastTimeEntriesAsyncActions } from '../../../store/features/clockify/last-time-entries/asyncActions'
 import { lastTimeEntriesSelectors } from '../../../store/features/clockify/last-time-entries/selectors'
 import { projectsClockifySelectors } from '../../../store/features/clockify/projects/selectors'
 import { trackingAsyncActions } from '../../../store/features/clockify/tracking/asyncActions'
@@ -57,7 +56,8 @@ export const TrackerPlayer: FC = () => {
     }
 
     useEffect(() => {
-        if (!tracking && lastTimeEntries !== undefined && projects !== undefined) {
+        if (!projects || projects.length === 0) return
+        if (!tracking && lastTimeEntries !== undefined && lastTimeEntries.length > 0) {
             const lastTimeEntry = lastTimeEntries[0]
             const project = projects.find(
                 (project) => project.id === lastTimeEntry.projectId,
@@ -74,7 +74,7 @@ export const TrackerPlayer: FC = () => {
             setPlayerInfo(newPlayerInfo)
             return
         }
-        if (tracking !== undefined && projects !== undefined) {
+        if (tracking !== undefined) {
             const project = projects.find((project) => project.id === tracking.projectId)
             const task = project?.tasks.find((task) => task.id === tracking.taskId)
             const newPlayerInfo: PlayerInfo = {
@@ -102,9 +102,7 @@ export const TrackerPlayer: FC = () => {
                     </div>
                     <div className="tracker_player_box_information">
                         <div className="tracker_player_box_information__task_name">
-                            {playerInfo?.taskName ||
-                                playerInfo?.projectName ||
-                                'Unknown task name'}
+                            {playerInfo?.taskName || 'Unknown task name'}
                         </div>
                         <Row className="tracker_player_box_information_details">
                             <Col

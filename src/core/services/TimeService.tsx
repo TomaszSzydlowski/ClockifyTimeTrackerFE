@@ -33,7 +33,7 @@ export default class TimeService {
             ? displayTime.seconds < 10 && displayTime.minutes !== 0
                 ? '0' + displayTime.seconds
                 : displayTime.seconds
-            : ''
+            : '00'
         const minutes = displayTime.minutes
             ? displayTime.minutes < 10
                 ? '0' + displayTime.minutes + ':'
