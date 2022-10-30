@@ -16,7 +16,7 @@ export const ProjectPage: FC = () => {
     const dispatch = useDispatch()
 
     const projects = useSelector(projectsClockifySelectors.getProjects)
-    const queryParam = useParams<{ number: string }>()
+    const queryParam = useParams<{ projectNumber: string }>()
 
     const userId = useSelector(userClockifySelectors.getUserId)
     const workspaceId = useSelector(userClockifySelectors.getDefaultWorkspaceId)
@@ -29,9 +29,9 @@ export const ProjectPage: FC = () => {
     const [quickActionTasks, setQuickActionTasks] = useState<QuickActionTask[]>([])
 
     useEffect(() => {
-        if (!projects || projects.length === 0 || !queryParam.number) return
+        if (!projects || projects.length === 0 || !queryParam.projectNumber) return
 
-        const project = projects.find((project) => project.id === queryParam.number)
+        const project = projects.find((project) => project.id === queryParam.projectNumber)
         if (!project) return
         const quickActionTasks: QuickActionTask[] = project.tasks.map((task) => ({
             taskId: task.id,

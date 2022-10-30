@@ -32,7 +32,6 @@ export default class TimeEntryApi {
         projectId: string,
         taskId: string | null,
     ): Promise<TimeEntryView> {
-        console.log(taskId, 'taskid')
         const { data } = await HttpClient.post<TimeEntryView>(
             endpoints.timeEntry.startTracking(workspaceId),
             {

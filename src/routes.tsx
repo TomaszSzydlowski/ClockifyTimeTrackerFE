@@ -48,7 +48,7 @@ export const AppRoutes: ConfigRoute[] = [
         allowUserWithNoAccess: false,
     },
     {
-        path: '/project/:number',
+        path: '/project/:projectNumber',
         component: ProjectPage,
         allowUserWithNoAccess: false,
     },
