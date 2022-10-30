@@ -3,6 +3,7 @@ import { FC } from 'react'
 import { DonatePage } from './view/pages/DonatePage'
 import { HomePage } from './view/pages/HomePage'
 import { PageNotFound } from './view/pages/PageNotFound'
+import { ProjectPage } from './view/pages/ProjectPage'
 import { SearchPage } from './view/pages/SearchPage'
 import { SettingsPage } from './view/pages/SettingsPage'
 
@@ -44,6 +45,11 @@ export const AppRoutes: ConfigRoute[] = [
     {
         path: '/donate',
         component: DonatePage,
+        allowUserWithNoAccess: false,
+    },
+    {
+        path: '/project/:number',
+        component: ProjectPage,
         allowUserWithNoAccess: false,
     },
     {
