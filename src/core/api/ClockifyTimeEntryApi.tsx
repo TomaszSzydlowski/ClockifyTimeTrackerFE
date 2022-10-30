@@ -30,7 +30,7 @@ export default class TimeEntryApi {
     static async startTracking(
         workspaceId: string,
         projectId: string,
-        taskId: string | null,
+        taskId?: string,
     ): Promise<TimeEntryView> {
         const { data } = await HttpClient.post<TimeEntryView>(
             endpoints.timeEntry.startTracking(workspaceId),

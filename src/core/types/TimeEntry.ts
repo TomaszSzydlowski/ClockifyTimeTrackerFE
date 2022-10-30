@@ -29,7 +29,7 @@ export interface TimeEntryView {
     id: string
     description: string
     projectId: string
-    taskId?: string | null
+    taskId?: string
     userId: string
     workspaceId: string
     timeInterval: TimeIntervalView

@@ -3,7 +3,7 @@
 export interface QuickActionTask {
     description?: string
     tags?: projectTag[]
-    taskId: string
+    taskId?: string
     projectId: string
     isTracking: boolean
 }
