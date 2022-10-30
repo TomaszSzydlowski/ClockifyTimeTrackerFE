@@ -14,7 +14,7 @@ export const Tasks: FC = () => {
     const userId = useSelector(userClockifySelectors.getUserId)
     const workspaceId = useSelector(userClockifySelectors.getDefaultWorkspaceId)
 
-    const handleStartClick = async (projectId: string, taskId: string) => {
+    const handleStartClick = async (projectId: string, taskId?: string) => {
         if (!workspaceId) return console.error('missing workspaceId')
         if (!userId) return console.error('missing userId')
         dispatch(

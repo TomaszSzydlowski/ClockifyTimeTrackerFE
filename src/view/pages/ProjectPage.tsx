@@ -31,7 +31,9 @@ export const ProjectPage: FC = () => {
     useEffect(() => {
         if (!projects || projects.length === 0 || !queryParam.projectNumber) return
 
-        const project = projects.find((project) => project.id === queryParam.projectNumber)
+        const project = projects.find(
+            (project) => project.id === queryParam.projectNumber,
+        )
         if (!project) return
         const quickActionTasks: QuickActionTask[] = project.tasks.map((task) => ({
             taskId: task.id,
@@ -64,7 +66,7 @@ export const ProjectPage: FC = () => {
         return false
     }
 
-    const handleStartClick = async (projectId: string, taskId: string) => {
+    const handleStartClick = async (projectId: string, taskId?: string) => {
         if (!workspaceId) return console.error('missing workspaceId')
         if (!userId) return console.error('missing userId')
         dispatch(

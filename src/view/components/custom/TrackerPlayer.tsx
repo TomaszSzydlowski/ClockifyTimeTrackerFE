@@ -32,7 +32,7 @@ export const TrackerPlayer: FC = () => {
     const { displayTimeView } = useLiveTime()
     const [playerInfo, setPlayerInfo] = useState<PlayerInfo | undefined>(undefined)
 
-    const handleStartClick = async (taskId: string | null, projectId?: string) => {
+    const handleStartClick = async (taskId?: string, projectId?: string) => {
         if (!projectId) return console.error('missing projectId')
         if (!workspaceId) return console.error('missing workspaceId')
         if (!userId) return console.error('missing userId')
@@ -136,7 +136,7 @@ export const TrackerPlayer: FC = () => {
                             tracking && !tracking.timeInterval.end
                                 ? handlePauseClick()
                                 : handleStartClick(
-                                      playerInfo?.taskId || null,
+                                      playerInfo?.taskId,
                                       playerInfo?.projectId,
                                   )
                         }}
