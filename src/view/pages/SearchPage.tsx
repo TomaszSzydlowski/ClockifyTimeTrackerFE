@@ -40,7 +40,11 @@ export const SearchPage: FC = () => {
                 <div className="search_page_collapse">
                     <Collapse>
                         {yoursProjectsView.map((projectView, index) => (
-                            <Panel key={index} header={projectView.name}>
+                            <Panel
+                                key={index}
+                                header={projectView.name}
+                                style={{ color: projectView.color }}
+                            >
                                 {projectView.tasks.map((task, index) => (
                                     <p key={index}>{task.name}</p>
                                 ))}
