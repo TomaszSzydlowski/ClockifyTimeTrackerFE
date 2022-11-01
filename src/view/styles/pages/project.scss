@@ -1,9 +1,16 @@
 ﻿.project_page {
-  padding-bottom: 16px;
+  &:first-child{
+    margin-top: 16px;
+  }
+  
+  &__header{
+    display: flex;
+    padding-bottom: 16px;
+
+  }
+  
 
   &__name {
-    font-size: 14px;
     padding: 4px;
-    border-radius: 4px;
   }
 }

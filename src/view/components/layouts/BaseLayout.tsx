@@ -6,6 +6,7 @@ import { FooterContent } from './FooterContent'
 import { HeaderContent } from './HeaderContent'
 
 export interface BaseLayoutProps {
+    isHeader?: boolean
     headerHeight?: number
     footerHeight?: number
     children?: ReactNode
@@ -14,15 +15,18 @@ export interface BaseLayoutProps {
 const { Header, Footer, Content } = Layout
 
 export const BaseLayout: FC<BaseLayoutProps> = ({
-    headerHeight = 48,
+    isHeader,
+    headerHeight = 0,
     footerHeight = 124,
     children,
 }) => {
     return (
         <Layout className="px-4">
-            <Header>
-                <HeaderContent />
-            </Header>
+            {isHeader && (
+                <Header>
+                    <HeaderContent />
+                </Header>
+            )}
             <Layout
                 style={{ minHeight: `calc(100vh - ${headerHeight + footerHeight}px)` }}
             >

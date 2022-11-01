@@ -1,4 +1,7 @@
 ﻿.search_page{
+  &:first-child{
+    margin-top: 16px;
+  }
 &_collapse{
   margin-top: 16px;
 }

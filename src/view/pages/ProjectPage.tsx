@@ -1,7 +1,9 @@
-﻿import { AnyAction } from '@reduxjs/toolkit'
+﻿import { LeftOutlined } from '@ant-design/icons'
+import { AnyAction } from '@reduxjs/toolkit'
+import { Button } from 'antd'
 import React, { FC, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { ProjectView, TaskView } from '../../core/types/Project'
 import { QuickActionTask } from '../../core/types/QuickActionTask'
@@ -14,6 +16,7 @@ import { BaseLayout } from '../components/layouts/BaseLayout'
 
 export const ProjectPage: FC = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const projects = useSelector(projectsClockifySelectors.getProjects)
     const queryParam = useParams<{ projectNumber: string }>()
@@ -92,11 +95,20 @@ export const ProjectPage: FC = () => {
         <BaseLayout>
             <>
                 <div className="project_page">
-                    <div
-                        className="project_page__name"
-                        style={{ backgroundColor: selectedProject?.color }}
-                    >
-                        {selectedProject?.name}
+                    <div className="project_page__header">
+                        <Button
+                            style={{ padding: 0 }}
+                            type="text"
+                            onClick={() => navigate('/home')}
+                        >
+                            <LeftOutlined />
+                        </Button>
+                        <h3
+                            className="project_page__name"
+                            style={{ color: selectedProject?.color }}
+                        >
+                            {selectedProject?.name}
+                        </h3>
                     </div>
                 </div>
                 {quickActionTasks?.map((quickActionTask, index) => (
