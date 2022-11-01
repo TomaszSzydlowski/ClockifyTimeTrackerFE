@@ -1,9 +1,7 @@
 ﻿import { Collapse } from 'antd'
 import { Input } from 'antd'
-import { SearchBar } from 'antd-mobile'
 import React, { FC, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Y } from 'vitest/dist/global-732f9b14'
 
 import { ProjectView } from '../../core/types/Project'
 import { projectsClockifySelectors } from '../../store/features/clockify/projects/selectors'

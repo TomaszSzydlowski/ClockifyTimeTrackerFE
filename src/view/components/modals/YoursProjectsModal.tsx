@@ -2,14 +2,14 @@
 import { Selector } from 'antd-mobile'
 import { SelectorOption } from 'antd-mobile/es/components/selector/selector'
 import ls from 'localstorage-slim'
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { CLOCKIFY_KEY, YOURS_PROJECTS } from '../../../core/consts/consts'
+import { YOURS_PROJECTS } from '../../../core/consts/consts'
 import { projectsClockifySelectors } from '../../../store/features/clockify/projects/selectors'
 import { yoursProjectsActions } from '../../../store/features/clockify/yours-projects'
+import { yoursProjectsSelectors } from '../../../store/features/clockify/yours-projects/selectors'
 import { modalActions } from '../../../store/features/modals/modal'
-import { userSecretsActions } from '../../../store/features/user-secrets'
 
 export interface BaseModalProps {
     onSave?(): void
@@ -28,6 +28,8 @@ export const YoursProjectsModal: FC<BaseModalProps> = ({
 }) => {
     const dispatch = useDispatch()
     const projects = useSelector(projectsClockifySelectors.getProjects)
+    const yoursProjects = useSelector(yoursProjectsSelectors.getYoursProjects)
+
     const hideModal = () => dispatch(modalActions.hideModal())
     const [yoursProjectsIds, setYoursProjectsIds] = useState<string[] | undefined>(
         undefined,
@@ -54,6 +56,11 @@ export const YoursProjectsModal: FC<BaseModalProps> = ({
             value: project.id,
         }))
     }
+    useEffect(() => {
+        if (!yoursProjects) return
+        setYoursProjectsIds(yoursProjects)
+    }, [yoursProjects])
+
     return (
         <Modal
             className="confirm-modal"
@@ -79,6 +86,7 @@ export const YoursProjectsModal: FC<BaseModalProps> = ({
                         columns={2}
                         options={options()}
                         multiple={true}
+                        value={yoursProjectsIds || []}
                         onChange={(arr) => setYoursProjectsIds(arr)}
                     />
                 </Col>
