@@ -1,22 +1,43 @@
-﻿import { Collapse } from 'antd'
+﻿import { AnyAction } from '@reduxjs/toolkit'
+import { Collapse } from 'antd'
 import { Input } from 'antd'
 import React, { FC, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { ProjectView } from '../../core/types/Project'
+import { ProjectView, TaskView } from '../../core/types/Project'
+import { QuickActionTask } from '../../core/types/QuickActionTask'
 import { projectsClockifySelectors } from '../../store/features/clockify/projects/selectors'
+import { trackingAsyncActions } from '../../store/features/clockify/tracking/asyncActions'
+import { trackingClockifySelectors } from '../../store/features/clockify/tracking/selectors'
+import { userClockifySelectors } from '../../store/features/clockify/user/selectors'
 import { yoursProjectsSelectors } from '../../store/features/clockify/yours-projects/selectors'
+import { TaskCard } from '../components/custom/TaskCard'
 import { BaseLayout } from '../components/layouts/BaseLayout'
 
 const { Panel } = Collapse
 const { Search } = Input
 
+interface ProjectQuickActionTasks {
+    name: string
+    color: string
+    quickActionTasks: QuickActionTask[]
+}
+
 export const SearchPage: FC = () => {
+    const dispatch = useDispatch()
+
     const projects = useSelector(projectsClockifySelectors.getProjects)
     const yoursProjects = useSelector(yoursProjectsSelectors.getYoursProjects)
     const [yoursProjectsView, setYoursProjectsView] = useState<ProjectView[]>([])
+    const [projectQuickActionTasks, setProjectQuickActionTasks] = useState<
+        ProjectQuickActionTasks[]
+    >([])
+    const userId = useSelector(userClockifySelectors.getUserId)
+    const workspaceId = useSelector(userClockifySelectors.getDefaultWorkspaceId)
+    const tracking = useSelector(trackingClockifySelectors.getTracking)
+    const [activityKey, setActivityKey] = useState<string | string[]>([])
 
-    useEffect(() => {
+    const setDefaultProjects = () => {
         if (
             !projects ||
             projects.length === 0 ||
@@ -24,30 +45,138 @@ export const SearchPage: FC = () => {
             yoursProjects.length === 0
         )
             return
-
         const newYoursProjectsView = projects.filter((project) =>
             yoursProjects.includes(project.id),
         )
         setYoursProjectsView(newYoursProjectsView)
+    }
+
+    useEffect(() => {
+        setDefaultProjects()
     }, [projects, yoursProjects])
 
-    const onSearch = (value: string) => console.log(value)
+    useEffect(() => {
+        if (!yoursProjectsView || yoursProjectsView.length === 0) return
 
+        const projectQuickActionTasks: ProjectQuickActionTasks[] = yoursProjectsView.map(
+            (project) => ({
+                name: project.name,
+                color: project.color,
+                quickActionTasks: project.tasks.map((task) => ({
+                    taskId: task.id,
+                    projectId: project.id,
+                    description: task.name,
+                    isTracking: checkIfIsTracking(project, task),
+                })),
+            }),
+        )
+
+        setProjectQuickActionTasks(projectQuickActionTasks)
+        return () => {
+            setProjectQuickActionTasks([])
+        }
+    }, [yoursProjectsView, tracking])
+
+    const checkIfIsTracking = (project?: ProjectView, task?: TaskView) => {
+        if (tracking === undefined) return false
+        if (tracking.timeInterval.end) return false
+        if (task === undefined) {
+            if (
+                project !== undefined &&
+                tracking.projectId === project.id &&
+                tracking.taskId === null
+            )
+                return true
+        } else {
+            if (task.id === tracking.taskId) return true
+        }
+
+        return false
+    }
+
+    const handleStartClick = async (projectId: string, taskId?: string) => {
+        if (!workspaceId) return console.error('missing workspaceId')
+        if (!userId) return console.error('missing userId')
+        dispatch(
+            trackingAsyncActions.startTracking({
+                workspaceId,
+                projectId,
+                taskId,
+            }) as unknown as AnyAction,
+        )
+    }
+    const handlePauseClick = async () => {
+        if (!workspaceId) return console.error('missing workspaceId')
+        if (!userId) return console.error('missing userId')
+        dispatch(
+            trackingAsyncActions.stopTracking({
+                workspaceId,
+                userId,
+            }) as unknown as AnyAction,
+        )
+    }
+
+    const onSearch = (value: string) => {
+        const projectQuickActionTasks: ProjectQuickActionTasks[] = yoursProjectsView.map(
+            (project) => {
+                const newTasks = project.tasks.filter((task) => task.name.includes(value))
+                return {
+                    name: project.name,
+                    color: project.color,
+                    quickActionTasks: newTasks.map((task) => ({
+                        taskId: task.id,
+                        projectId: project.id,
+                        description: task.name,
+                        isTracking: checkIfIsTracking(project, task),
+                    })),
+                }
+            },
+        )
+        const removeEmptyProject = projectQuickActionTasks.filter(
+            (project) => project.quickActionTasks.length > 0,
+        )
+        setProjectQuickActionTasks(removeEmptyProject)
+        if (value === '') {
+            setActivityKey([])
+            return
+        }
+        const activeKeyOpenWhenFound = removeEmptyProject.map((_, index) =>
+            index.toString(),
+        )
+        setActivityKey(activeKeyOpenWhenFound)
+    }
     return (
         <BaseLayout>
             <div className="search_page">
-                <Search placeholder="input search text" allowClear onSearch={onSearch} />
+                <Search placeholder="tasks search" allowClear onSearch={onSearch} />
                 <div className="search_page_collapse">
-                    <Collapse>
-                        {yoursProjectsView.map((projectView, index) => (
+                    <Collapse
+                        bordered={false}
+                        activeKey={activityKey}
+                        onChange={(key) => setActivityKey(key)}
+                    >
+                        {projectQuickActionTasks.map((project, index) => (
                             <Panel
                                 key={index}
-                                header={projectView.name}
-                                style={{ color: projectView.color }}
+                                header={project.name}
+                                style={{ color: project.color }}
                             >
-                                {projectView.tasks.map((task, index) => (
-                                    <p key={index}>{task.name}</p>
-                                ))}
+                                {project.quickActionTasks.map(
+                                    (quickActionTask, index) => (
+                                        <TaskCard
+                                            key={index}
+                                            description={quickActionTask.description}
+                                            onStartClick={() =>
+                                                handleStartClick(
+                                                    quickActionTask.projectId,
+                                                    quickActionTask.taskId,
+                                                )
+                                            }
+                                            onPauseClick={handlePauseClick}
+                                            isTracking={quickActionTask.isTracking}
+                                        />
+                                    ),
+                                )}
                             </Panel>
                         ))}
                     </Collapse>
