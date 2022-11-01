@@ -1,4 +1,4 @@
-﻿import { Button } from 'antd'
+﻿import { Button, Card, Col, Row } from 'antd'
 import React, { FC } from 'react'
 import { useDispatch } from 'react-redux'
 
@@ -33,13 +33,43 @@ export const SettingsPage: FC = () => {
 
     return (
         <BaseLayout>
-            <div className="settings_page__box">
-                <Button type={'primary'} onClick={selectProject}>
-                    Select Yours Projects
-                </Button>
-                <Button type={'primary'} danger onClick={clearData}>
-                    Clear data
-                </Button>
+            <div className="settings_page">
+                <div className="settings_page__box">
+                    <h2>Projects</h2>
+                    <Card>
+                        <div className="settings_page__description">
+                            Select the projects you want to be displayed in the
+                            application
+                        </div>
+                        <div className="settings_page__action">
+                            <Button
+                                type={'primary'}
+                                onClick={selectProject}
+                                size={'small'}
+                            >
+                                Select Projects
+                            </Button>
+                        </div>
+                    </Card>
+                </div>
+                <div className="settings_page__box">
+                    <h2>Danger Zone</h2>
+                    <Card className="settings_page__card--danger">
+                        <div className="settings_page__description">
+                            Clear tokens for Azure Dev Ops and Clockify
+                        </div>
+                        <div className="settings_page__action">
+                            <Button
+                                type={'primary'}
+                                danger
+                                onClick={clearData}
+                                size={'small'}
+                            >
+                                Clear data
+                            </Button>
+                        </div>
+                    </Card>
+                </div>
             </div>
         </BaseLayout>
     )

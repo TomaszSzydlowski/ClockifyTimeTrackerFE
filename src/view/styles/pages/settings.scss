@@ -1,12 +1,24 @@
 ﻿@import "../varibales";
 
-.settings_page{
-  &__label{
-    color: $label-color;
-    font-size: 16px;
+.settings_page {
+  &__box {
+    margin-bottom: 12px;
   }
+    &__description {
+    }
+
+    &__action {
+      padding-left: 4px;
+    }
   
-  &__box{
-    
+  &__card--danger{
+    border:1px solid $dangerous-color !important;
   }
-}
+
+    .ant-card-body {
+      padding: 16px;
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+    }
+  }
