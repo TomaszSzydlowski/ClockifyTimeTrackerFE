@@ -1,24 +1,29 @@
-﻿.task_box{
+﻿.task_box {
   padding-bottom: 4px;
-  .ant-card-body{
+
+  .ant-card-body {
     padding: 8px;
   }
-  &_description{
-    &__task{
+
+  &_description {
+    &__task {
       font-size: 12px;
     }
-    &__tags{
+
+    &__tags {
       padding-bottom: 4px;
-      .ant-tag{
+
+      .ant-tag {
         font-size: 9px;
         padding: 0 1px;
         margin-right: 4px;
         line-height: 12px;
+        color: black;
       }
     }
   }
-  
-  &__action{
+
+  &__action {
     display: flex !important;
     justify-content: center;
     align-items: center;
