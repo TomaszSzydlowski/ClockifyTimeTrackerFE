@@ -119,7 +119,9 @@ export const SearchPage: FC = () => {
     const onSearch = (value: string) => {
         const projectQuickActionTasks: ProjectQuickActionTasks[] = yoursProjectsView.map(
             (project) => {
-                const newTasks = project.tasks.filter((task) => task.name.includes(value))
+                const newTasks = project.tasks.filter((task) =>
+                    task.name.toLowerCase().includes(value.toLowerCase()),
+                )
                 return {
                     name: project.name,
                     color: project.color,
