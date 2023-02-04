@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 /Folder.DotSettings.user
 .env
+/azure/
+deploy.ps1
