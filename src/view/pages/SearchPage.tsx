@@ -37,6 +37,12 @@ export const SearchPage: FC = () => {
     const tracking = useSelector(trackingClockifySelectors.getTracking)
     const [activityKey, setActivityKey] = useState<string | string[]>([])
 
+    // useEffect(() => {
+    //     if (!projects) return
+    //     const tasks = projects.filter((p) => p.tasks.length > 0).flatMap((p) => p.tasks.map((t)=>t.name))
+    //     console.log(tasks)
+    // }, [projects])
+
     const setDefaultProjects = () => {
         if (
             !projects ||
