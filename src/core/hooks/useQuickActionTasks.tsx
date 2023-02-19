@@ -31,7 +31,10 @@ export const useQuickActionTasks = (): QuickActionTask[] => {
         if (!project) return []
 
         const regex = /\B- #\w+/
-        const tagsDescription = project.name.replace(regex, '').split(' - ')
+        const tagsDescription = project.name
+            .replace(regex, '')
+            .replace('[DEV] ', '')
+            .split(' - ')
         return tagsDescription.map((tag) => ({
             text: tag,
             color: project.color,

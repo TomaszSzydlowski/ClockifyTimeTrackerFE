@@ -26,7 +26,7 @@ export const TaskCard: FC<TaskCardProps> = ({
         <div className="task_box">
             <Card>
                 <Row>
-                    <Col span={20} className="task_box_description">
+                    <Col span={21} className="task_box_description">
                         {projectTags !== undefined && (
                             <div className="task_box_description__tags">
                                 {projectTags.map(({ text, color }, index) => (
@@ -38,7 +38,7 @@ export const TaskCard: FC<TaskCardProps> = ({
                         )}
                         <div className="task_box_description__task">{description}</div>
                     </Col>
-                    <Col span={4} className="task_box__action">
+                    <Col span={3} className="task_box__action">
                         <Button
                             shape="circle"
                             icon={isTracking ? <PauseOutlined /> : <CaretRightOutlined />}
