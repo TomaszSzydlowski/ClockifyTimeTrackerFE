@@ -36,7 +36,7 @@ export const Tasks: FC = () => {
         )
     }
     return (
-        <div className="tasks_list">
+        <div>
             {quickActionTask.map((quickActionTask, index) => (
                 <TaskCard
                     key={index}
