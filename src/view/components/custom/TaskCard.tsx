@@ -2,14 +2,14 @@
 import { Button, Card, Col, Row, Tag } from 'antd'
 import React, { FC } from 'react'
 
-export interface projectTag {
+export interface ProjectTag {
     text: string
     color: string
 }
 
 interface TaskCardProps {
     description?: string
-    projectTags?: projectTag[]
+    projectTags?: ProjectTag[]
     onStartClick: () => void
     onPauseClick: () => void
     isTracking: boolean

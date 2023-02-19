@@ -1,11 +1,10 @@
-﻿import { AnyAction } from '@reduxjs/toolkit'
-import { useEffect, useState } from 'react'
+﻿import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { lastTimeEntriesSelectors } from '../../store/features/clockify/last-time-entries/selectors'
 import { projectsClockifySelectors } from '../../store/features/clockify/projects/selectors'
 import { trackingClockifySelectors } from '../../store/features/clockify/tracking/selectors'
-import { projectTag } from '../../view/components/custom/TaskCard'
+import { ProjectTag } from '../../view/components/custom/TaskCard'
 import { ProjectView, TaskView } from '../types/Project'
 import { QuickActionTask } from '../types/QuickActionTask'
 import { TimeEntryView } from '../types/TimeEntry'
@@ -28,7 +27,7 @@ export const useQuickActionTasks = (): QuickActionTask[] => {
         }
     }, [lastTimeEntries, projects, tracking])
 
-    const mapToTags = (project?: ProjectView): projectTag[] => {
+    const mapToTags = (project?: ProjectView): ProjectTag[] => {
         if (!project) return []
 
         const regex = /\B- #\w+/
