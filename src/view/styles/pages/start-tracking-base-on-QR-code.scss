@@ -1,0 +1,61 @@
+﻿@import "../varibales";
+
+.start-tracking-base-on-qr-code {
+  text-align: center;
+  color: $label-color;
+
+  &-icon-container {
+    margin-top: 100px;
+    margin-bottom: 4px;
+
+    &__icon_background {
+      margin: auto;
+      height: 120px;
+      width: 120px;
+      background-color: $success-color;
+      border-radius: 50%;
+      position: relative;
+    }
+
+    &__icon_content {
+      font-size: 60px;
+      font-weight: 700;
+      color: white;
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &__title {
+    font-size: 20px;
+    
+    h2{
+      margin: 16px 0;
+    }
+  }
+  &__description{
+    font-size: 18px;
+    margin: 16px 0;
+
+  }
+  
+  &__action{
+    margin: 32px 0;
+    
+    button{
+      border-radius: 20px !important;
+      background-color: black;
+      border-color: $success-color;
+      color: $success-color;
+      padding: 0 40px !important;
+      &:hover{
+        border-color: $success-color !important;
+        color: $success-color !important;
+      }
+    }
+  }
+}

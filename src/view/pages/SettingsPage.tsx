@@ -1,19 +1,29 @@
-﻿import { Button, Card, Col, Row } from 'antd'
+﻿import { Button, Card } from 'antd'
 import React, { FC } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { AZURE_DEV_OPS_TOKEN, CLOCKIFY_KEY } from '../../core/consts/consts'
 import { ModalType } from '../../core/types/enums/ModalType'
+import { projectsClockifySelectors } from '../../store/features/clockify/projects/selectors'
 import { modalActions } from '../../store/features/modals/modal'
+import { qrCodeActions } from '../../store/features/qr-code'
 import { BaseLayout } from '../components/layouts/BaseLayout'
+import { QRCreatorProjectModalProps } from '../components/modals/QRProjectSelectModal'
 import { BaseModalProps } from '../components/modals/UserSecretsModal'
 
 export const SettingsPage: FC = () => {
     const dispatch = useDispatch()
+    const projects = useSelector(projectsClockifySelectors.getProjects)
 
     const YoursProjectsModalProps: BaseModalProps = {
-        title: 'Please select your favourite projects',
-        description: 'To avoid to many request, please select project in which you work',
+        title: 'Projects',
+        description: 'Please select your work projects',
+    }
+
+    const QRProjectSelectModalProps: QRCreatorProjectModalProps = {
+        title: 'Select Project',
+        description: 'Step 1/2 select project',
+        modalOptions: projects,
     }
 
     const clearData = () => {
@@ -27,6 +37,16 @@ export const SettingsPage: FC = () => {
             modalActions.showModal({
                 type: ModalType.YoursProjectsModal,
                 props: YoursProjectsModalProps,
+            }),
+        )
+    }
+
+    const createQRCode = () => {
+        dispatch(qrCodeActions.clear())
+        dispatch(
+            modalActions.showModal({
+                type: ModalType.QRProjectSelectModal,
+                props: QRProjectSelectModalProps,
             }),
         )
     }
@@ -48,6 +68,24 @@ export const SettingsPage: FC = () => {
                                 size={'small'}
                             >
                                 Select Projects
+                            </Button>
+                        </div>
+                    </Card>
+                </div>
+                <div className="settings_page__box">
+                    <h2>QR Code</h2>
+                    <Card>
+                        <div className="settings_page__description">
+                            Generate the QR code of the task. Once scanned, it will
+                            automatically start tracing time for this task
+                        </div>
+                        <div className="settings_page__action">
+                            <Button
+                                type={'primary'}
+                                onClick={createQRCode}
+                                size={'small'}
+                            >
+                                Create
                             </Button>
                         </div>
                     </Card>

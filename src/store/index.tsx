@@ -31,6 +31,11 @@ import {
     ModalStoreModel,
 } from './features/modals/modal'
 import {
+    qrCodeDefaultValueProvider,
+    qrCodeSlice,
+    qrCodeStoreModel,
+} from './features/qr-code'
+import {
     userSecretsDefaultValueProvider,
     userSecretsSlice,
     userSecretsStoreModel,
@@ -44,6 +49,7 @@ export interface StoreModel {
     clockifyProjects: projectsStoreModel
     yoursProjects: yoursProjectsStoreModel
     clockifyTracking: trackingStoreModel
+    QRCodeData: qrCodeStoreModel
 }
 
 const prepareServerDataToStore = (): StoreModel => ({
@@ -54,6 +60,7 @@ const prepareServerDataToStore = (): StoreModel => ({
     clockifyProjects: projectsDefaultValueProvider(),
     yoursProjects: yoursProjectsDefaultValueProvider(),
     clockifyTracking: trackingDefaultValueProvider(),
+    QRCodeData: qrCodeDefaultValueProvider(),
 })
 
 const store = configureStore({
@@ -65,6 +72,7 @@ const store = configureStore({
         clockifyProjects: projectsSlice.reducer,
         yoursProjects: yoursProjectsSlice.reducer,
         clockifyTracking: trackingSlice.reducer,
+        QRCodeData: qrCodeSlice.reducer,
     },
     preloadedState: prepareServerDataToStore(),
     middleware: (defaultMiddleware) => defaultMiddleware({ serializableCheck: false }),

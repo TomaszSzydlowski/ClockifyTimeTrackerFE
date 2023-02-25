@@ -5,7 +5,7 @@ import { BaseLayout } from '../components/layouts/BaseLayout'
 
 export const HomePage: FC = () => {
     return (
-        <BaseLayout isHeader headerHeight={48}>
+        <BaseLayout isHeader>
             <div className="home_page_box">
                 <Tasks />
             </div>

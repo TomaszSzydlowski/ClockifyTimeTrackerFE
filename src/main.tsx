@@ -1,6 +1,6 @@
 import './view/styles/index.scss'
-import 'antd/dist/antd.dark.css'
 
+import { ConfigProvider, theme } from 'antd'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
@@ -13,32 +13,36 @@ import { CurrentUserSettings } from './view/components/app/CurrentUserSettings'
 import { RedirectUrlSanitizer } from './view/components/app/RedirectUrlSanitizer'
 import { TimeTrackingTabTitle } from './view/components/app/TimeTrackingTabTitle'
 
+const { darkAlgorithm } = theme
+
 const store = buildStore()
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
         <Provider store={store}>
-            <RedirectUrlSanitizer />
-            <HashRouter>
-                <CurrentUserSettings />
-                <ClockifyInitialData />
-                <TimeTrackingTabTitle />
-                <Routes>
-                    {AppRedirect.map((route, i: number) => (
-                        <Route
-                            key={`redirect-${i}`}
-                            path={route.path}
-                            element={<Navigate to={route.redirect} />}
-                        />
-                    ))}
-                    {AppRoutes.map((route, i: number) => (
-                        <Route
-                            path={route.path}
-                            key={`route-${i}`}
-                            element={<route.component />}
-                        />
-                    ))}
-                </Routes>
-            </HashRouter>
+            <ConfigProvider theme={{ algorithm: darkAlgorithm }}>
+                <RedirectUrlSanitizer />
+                <HashRouter>
+                    <CurrentUserSettings />
+                    <ClockifyInitialData />
+                    <TimeTrackingTabTitle />
+                    <Routes>
+                        {AppRedirect.map((route, i: number) => (
+                            <Route
+                                key={`redirect-${i}`}
+                                path={route.path}
+                                element={<Navigate to={route.redirect} />}
+                            />
+                        ))}
+                        {AppRoutes.map((route, i: number) => (
+                            <Route
+                                path={route.path}
+                                key={`route-${i}`}
+                                element={<route.component />}
+                            />
+                        ))}
+                    </Routes>
+                </HashRouter>
+            </ConfigProvider>
         </Provider>
     </React.StrictMode>,
 )

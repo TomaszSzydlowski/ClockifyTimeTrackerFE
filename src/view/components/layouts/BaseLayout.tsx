@@ -16,8 +16,8 @@ const { Header, Footer, Content } = Layout
 
 export const BaseLayout: FC<BaseLayoutProps> = ({
     isHeader,
-    headerHeight = 0,
-    footerHeight = 124,
+    headerHeight = 48,
+    footerHeight = 120,
     children,
 }) => {
     return (
@@ -28,7 +28,11 @@ export const BaseLayout: FC<BaseLayoutProps> = ({
                 </Header>
             )}
             <Layout
-                style={{ minHeight: `calc(100vh - ${headerHeight + footerHeight}px)` }}
+                style={{
+                    minHeight: `calc(100vh - ${
+                        isHeader ? headerHeight : 0 + footerHeight
+                    }px)`,
+                }}
             >
                 <Content>{children}</Content>
                 <ModalContainer />

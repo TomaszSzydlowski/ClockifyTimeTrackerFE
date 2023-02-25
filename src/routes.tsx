@@ -6,6 +6,7 @@ import { PageNotFound } from './view/pages/PageNotFound'
 import { ProjectPage } from './view/pages/ProjectPage'
 import { SearchPage } from './view/pages/SearchPage'
 import { SettingsPage } from './view/pages/SettingsPage'
+import { StartTrackingBaseOnQRCode } from './view/pages/StartTrackingBaseOnQRCode'
 
 interface ConfigRoute {
     path: string
@@ -50,6 +51,11 @@ export const AppRoutes: ConfigRoute[] = [
     {
         path: '/project/:projectNumber',
         component: ProjectPage,
+        allowUserWithNoAccess: false,
+    },
+    {
+        path: '/startTrackingBaseOnQRCode',
+        component: StartTrackingBaseOnQRCode,
         allowUserWithNoAccess: false,
     },
     {
