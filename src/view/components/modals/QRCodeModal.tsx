@@ -48,6 +48,7 @@ export const QRCodeModal: FC<QRCreatorModalProps> = ({ title, description }) => 
                     {url && (
                         <QRCode
                             style={{ margin: 'auto' }}
+                            size={240}
                             errorLevel="H"
                             value={url}
                             icon="https://imgtr.ee/images/2023/02/25/RW1BU.png"

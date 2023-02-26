@@ -5,13 +5,13 @@
   color: $label-color;
 
   &-icon-container {
-    margin-top: 100px;
+    margin-top: 8%;
     margin-bottom: 4px;
 
     &__icon_background {
       margin: auto;
-      height: 120px;
-      width: 120px;
+      height: 100px;
+      width: 100px;
       background-color: $success-color;
       border-radius: 50%;
       position: relative;
@@ -31,20 +31,20 @@
   }
 
   &__title {
-    font-size: 20px;
+    font-size: 18px;
     
     h2{
-      margin: 16px 0;
+      margin: 8px 0;
     }
   }
   &__description{
-    font-size: 18px;
+    font-size: 16px;
     margin: 16px 0;
 
   }
   
   &__action{
-    margin: 32px 0;
+    margin: 16px 0;
     
     button{
       border-radius: 20px !important;

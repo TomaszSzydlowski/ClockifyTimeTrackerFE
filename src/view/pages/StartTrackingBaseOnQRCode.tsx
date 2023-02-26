@@ -1,7 +1,7 @@
 ﻿import { CheckOutlined } from '@ant-design/icons'
 import { AnyAction } from '@reduxjs/toolkit'
 import { Button } from 'antd'
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
@@ -20,6 +20,8 @@ export const StartTrackingBaseOnQRCode: FC = () => {
     const workspaceId = useSelector(userClockifySelectors.getDefaultWorkspaceId)
     const userId = useSelector(userClockifySelectors.getUserId)
     const projects = useSelector(projectsClockifySelectors.getProjects)
+    let intervalId: NodeJS.Timer | null = null
+    const [timer, setTimer] = useState<number>(5)
 
     useEffect(() => {
         if (!userId || !workspaceId || !projects || !projectIdFromUrl || !taskIdFromUrl)
@@ -32,6 +34,18 @@ export const StartTrackingBaseOnQRCode: FC = () => {
             }) as unknown as AnyAction,
         )
     }, [workspaceId, userId, projects])
+
+    useEffect(() => {
+        intervalId = setInterval(() => setTimer((prevValue) => prevValue - 1), 1000)
+        return () => {
+            if (intervalId) clearInterval(intervalId)
+            setTimer(5)
+        }
+    }, [])
+
+    useEffect(() => {
+        if (timer === 0) navigate('/home')
+    }, [timer])
 
     const handleOnClick = () => {
         navigate('/home')
@@ -51,7 +65,8 @@ export const StartTrackingBaseOnQRCode: FC = () => {
                     <h2>Success!</h2>
                 </div>
                 <span className="start-tracking-base-on-qr-code__description">
-                    Your time is tracking.
+                    Your time is tracking. You will be redirected to the homepage after{' '}
+                    {timer} seconds.
                 </span>
                 <div className="start-tracking-base-on-qr-code__action">
                     <Button type={'default'} size={'large'} onClick={handleOnClick}>
