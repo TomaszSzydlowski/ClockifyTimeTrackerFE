@@ -2,7 +2,6 @@ import { FC } from 'react'
 
 import { HomePage } from './view/pages/HomePage'
 import { PageNotFound } from './view/pages/PageNotFound'
-import { ProjectPage } from './view/pages/ProjectPage'
 import { SearchPage } from './view/pages/SearchPage'
 import { SettingsPage } from './view/pages/SettingsPage'
 import { StartTrackingBaseOnQRCode } from './view/pages/StartTrackingBaseOnQRCode'
@@ -46,11 +45,6 @@ export const AppRoutes: ConfigRoute[] = [
     {
         path: '/statistics',
         component: StatisticsPage,
-        allowUserWithNoAccess: false,
-    },
-    {
-        path: '/project/:projectNumber',
-        component: ProjectPage,
         allowUserWithNoAccess: false,
     },
     {
