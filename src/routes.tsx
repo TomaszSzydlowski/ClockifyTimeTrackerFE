@@ -1,12 +1,12 @@
 import { FC } from 'react'
 
-import { DonatePage } from './view/pages/DonatePage'
 import { HomePage } from './view/pages/HomePage'
 import { PageNotFound } from './view/pages/PageNotFound'
 import { ProjectPage } from './view/pages/ProjectPage'
 import { SearchPage } from './view/pages/SearchPage'
 import { SettingsPage } from './view/pages/SettingsPage'
 import { StartTrackingBaseOnQRCode } from './view/pages/StartTrackingBaseOnQRCode'
+import { StatisticsPage } from './view/pages/StatisticsPage'
 
 interface ConfigRoute {
     path: string
@@ -44,8 +44,8 @@ export const AppRoutes: ConfigRoute[] = [
         allowUserWithNoAccess: false,
     },
     {
-        path: '/donate',
-        component: DonatePage,
+        path: '/statistics',
+        component: StatisticsPage,
         allowUserWithNoAccess: false,
     },
     {

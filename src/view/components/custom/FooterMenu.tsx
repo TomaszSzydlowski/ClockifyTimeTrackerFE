@@ -1,5 +1,5 @@
 ﻿import {
-    CoffeeOutlined,
+    BarChartOutlined,
     HomeOutlined,
     SearchOutlined,
     SettingOutlined,
@@ -32,19 +32,20 @@ export const FooterMenu: FC = () => {
             </div>
             <div
                 className={StringService.logicConcat('footer_menu__element', {
+                    'footer_menu__element--is-active':
+                        location.pathname === '/statistics',
+                })}
+            >
+                <BarChartOutlined onClick={() => navigate('/statistics')} />
+                <span className="footer_menu__element-description">Statistics</span>
+            </div>
+            <div
+                className={StringService.logicConcat('footer_menu__element', {
                     'footer_menu__element--is-active': location.pathname === '/settings',
                 })}
             >
                 <SettingOutlined onClick={() => navigate('/settings')} />
                 <span className="footer_menu__element-description">Settings</span>
-            </div>
-            <div
-                className={StringService.logicConcat('footer_menu__element', {
-                    'footer_menu__element--is-active': location.pathname === '/donate',
-                })}
-            >
-                <CoffeeOutlined onClick={() => navigate('/donate')} />
-                <span className="footer_menu__element-description">Donate</span>
             </div>
         </div>
     )
