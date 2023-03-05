@@ -1,7 +1,14 @@
 ﻿import { AnyAction } from '@reduxjs/toolkit'
 import { Collapse } from 'antd'
 import { Input } from 'antd'
-import React, { FC, useEffect, useState } from 'react'
+import React, {
+    ChangeEvent,
+    ChangeEventHandler,
+    FC,
+    FormEvent,
+    useEffect,
+    useState,
+} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { ProjectView, TaskView } from '../../core/types/Project'
@@ -122,7 +129,8 @@ export const SearchPage: FC = () => {
         )
     }
 
-    const onSearch = (value: string) => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value
         const projectQuickActionTasks: ProjectQuickActionTasks[] = yoursProjectsView.map(
             (project) => {
                 const newTasks = project.tasks.filter((task) =>
@@ -156,7 +164,7 @@ export const SearchPage: FC = () => {
     return (
         <BaseLayout>
             <div className="search_page">
-                <Search placeholder="tasks search" allowClear onSearch={onSearch} />
+                <Search placeholder="tasks search" allowClear onChange={onChange} />
                 <div className="search_page_collapse">
                     <Collapse
                         bordered={false}
