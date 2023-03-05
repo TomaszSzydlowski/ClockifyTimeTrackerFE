@@ -1,14 +1,7 @@
 ﻿import { AnyAction } from '@reduxjs/toolkit'
-import { Collapse } from 'antd'
+import { Collapse, InputRef } from 'antd'
 import { Input } from 'antd'
-import React, {
-    ChangeEvent,
-    ChangeEventHandler,
-    FC,
-    FormEvent,
-    useEffect,
-    useState,
-} from 'react'
+import React, { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { ProjectView, TaskView } from '../../core/types/Project'
@@ -43,6 +36,7 @@ export const SearchPage: FC = () => {
     const workspaceId = useSelector(userClockifySelectors.getDefaultWorkspaceId)
     const tracking = useSelector(trackingClockifySelectors.getTracking)
     const [activityKey, setActivityKey] = useState<string | string[]>([])
+    const searchInput = useRef<InputRef>(null)
 
     // useEffect(() => {
     //     if (!projects) return
@@ -63,6 +57,10 @@ export const SearchPage: FC = () => {
         )
         setYoursProjectsView(newYoursProjectsView)
     }
+
+    useEffect(() => {
+        searchInput.current?.focus()
+    }, [])
 
     useEffect(() => {
         setDefaultProjects()
@@ -164,7 +162,12 @@ export const SearchPage: FC = () => {
     return (
         <BaseLayout>
             <div className="search_page">
-                <Search placeholder="tasks search" allowClear onChange={onChange} />
+                <Search
+                    placeholder="tasks search"
+                    allowClear
+                    onChange={onChange}
+                    ref={searchInput}
+                />
                 <div className="search_page_collapse">
                     <Collapse
                         bordered={false}
