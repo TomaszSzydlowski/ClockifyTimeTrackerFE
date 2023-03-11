@@ -9,6 +9,7 @@ import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { AppRedirect, AppRoutes } from './routes'
 import { buildStore } from './store'
 import { ClockifyInitialData } from './view/components/app/ClockifyInitialData'
+import { ClockifyIntervalRequests } from './view/components/app/ClockifyIntervalRequests'
 import { CurrentUserSettings } from './view/components/app/CurrentUserSettings'
 import { RedirectUrlSanitizer } from './view/components/app/RedirectUrlSanitizer'
 import { TimeTrackingTabTitle } from './view/components/app/TimeTrackingTabTitle'
@@ -24,6 +25,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                 <HashRouter>
                     <CurrentUserSettings />
                     <ClockifyInitialData />
+                    <ClockifyIntervalRequests />
                     <TimeTrackingTabTitle />
                     <Routes>
                         {AppRedirect.map((route, i: number) => (

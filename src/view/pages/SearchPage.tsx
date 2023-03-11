@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { ProjectView, TaskView } from '../../core/types/Project'
 import { QuickActionTask } from '../../core/types/QuickActionTask'
+import { lastTimeEntriesAsyncActions } from '../../store/features/clockify/last-time-entries/asyncActions'
+import { projectsAsyncActions } from '../../store/features/clockify/projects/asyncActions'
 import { projectsClockifySelectors } from '../../store/features/clockify/projects/selectors'
 import { trackingAsyncActions } from '../../store/features/clockify/tracking/asyncActions'
 import { trackingClockifySelectors } from '../../store/features/clockify/tracking/selectors'
@@ -44,12 +46,6 @@ export const SearchPage: FC = () => {
     const tracking = useSelector(trackingClockifySelectors.getTracking)
     const [activityKey, setActivityKey] = useState<string | string[]>([])
 
-    // useEffect(() => {
-    //     if (!projects) return
-    //     const tasks = projects.filter((p) => p.tasks.length > 0).flatMap((p) => p.tasks.map((t)=>t.name))
-    //     console.log(tasks)
-    // }, [projects])
-
     const setDefaultProjects = () => {
         if (
             !projects ||
@@ -63,6 +59,13 @@ export const SearchPage: FC = () => {
         )
         setYoursProjectsView(newYoursProjectsView)
     }
+
+    useEffect(() => {
+        if (!userId || !workspaceId) return
+        dispatch(
+            projectsAsyncActions.getClockifyProjects(workspaceId) as unknown as AnyAction,
+        )
+    }, [userId, workspaceId])
 
     useEffect(() => {
         setDefaultProjects()
