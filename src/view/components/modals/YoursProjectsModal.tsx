@@ -1,6 +1,5 @@
-﻿import { Button, Col, Input, Modal, Row } from 'antd'
+﻿import { Button, Col, Modal, Row } from 'antd'
 import { Selector } from 'antd-mobile'
-import { SelectorOption } from 'antd-mobile/es/components/selector/selector'
 import ls from 'localstorage-slim'
 import React, { FC, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -24,7 +23,6 @@ export const YoursProjectsModal: FC<BaseModalProps> = ({
     title,
     description,
     onSave,
-    onDontSave,
 }) => {
     const dispatch = useDispatch()
     const projects = useSelector(projectsClockifySelectors.getProjects)
@@ -34,11 +32,6 @@ export const YoursProjectsModal: FC<BaseModalProps> = ({
     const [yoursProjectsIds, setYoursProjectsIds] = useState<string[] | undefined>(
         undefined,
     )
-
-    const handleDontSave = () => {
-        hideModal()
-        if (onDontSave) onDontSave()
-    }
 
     const handleSave = () => {
         if (yoursProjectsIds !== undefined) {
@@ -70,9 +63,6 @@ export const YoursProjectsModal: FC<BaseModalProps> = ({
             centered
             closeIcon={<i className="fas fa-times" />}
             footer={[
-                <Button key="dontSave" danger type="primary" onClick={handleDontSave}>
-                    {"DON'T SAVE"}
-                </Button>,
                 <Button key="save" color="primary" type="primary" onClick={handleSave}>
                     {'SAVE'}
                 </Button>,
