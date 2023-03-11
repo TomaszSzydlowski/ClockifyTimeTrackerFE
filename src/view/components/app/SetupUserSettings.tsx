@@ -10,7 +10,7 @@ import { userSecretsActions } from '../../../store/features/user-secrets'
 import { userSecretsSelectors } from '../../../store/features/user-secrets/selectors'
 import { BaseModalProps } from '../modals/UserSecretsModal'
 
-export const CurrentUserSettings: FC = () => {
+export const SetupUserSettings: FC = () => {
     const dispatch = useDispatch()
     const [isFirstRun, setIsFirstRun] = useState<boolean>(true)
     const azureDevOpsToken = useSelector(

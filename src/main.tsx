@@ -10,9 +10,10 @@ import { AppRedirect, AppRoutes } from './routes'
 import { buildStore } from './store'
 import { ClockifyInitialData } from './view/components/app/ClockifyInitialData'
 import { ClockifyIntervalRequests } from './view/components/app/ClockifyIntervalRequests'
-import { CurrentUserSettings } from './view/components/app/CurrentUserSettings'
 import { RedirectUrlSanitizer } from './view/components/app/RedirectUrlSanitizer'
+import { SetupUserSettings } from './view/components/app/SetupUserSettings'
 import { TimeTrackingTabTitle } from './view/components/app/TimeTrackingTabTitle'
+import { VersionChecker } from './view/components/app/VersionChecker'
 
 const { darkAlgorithm } = theme
 
@@ -23,10 +24,11 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             <ConfigProvider theme={{ algorithm: darkAlgorithm }}>
                 <RedirectUrlSanitizer />
                 <HashRouter>
-                    <CurrentUserSettings />
+                    <SetupUserSettings />
                     <ClockifyInitialData />
                     <ClockifyIntervalRequests />
                     <TimeTrackingTabTitle />
+                    <VersionChecker />
                     <Routes>
                         {AppRedirect.map((route, i: number) => (
                             <Route

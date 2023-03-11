@@ -1,0 +1,27 @@
+@import "../varibales";
+
+.ant-notification-notice-message{
+  font-weight: 700;
+}
+
+.version-checker-block__btn-container {
+  display: block;
+  float: right;
+  margin-top: 20px;
+
+  button {
+    margin-left: 8px;
+    height: 32px;
+    
+    &.ant-btn-sm{
+      border-radius: 12px;
+
+    }
+  }
+
+  .version-checker-block__btn-later {
+    color: $primary-color;
+    background-color: #f3fbff;
+    border: solid 1px #8dccf0;
+  }
+}
