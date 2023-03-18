@@ -2,11 +2,13 @@
 
 .search_page {
   &_header {
+    margin-top: 16px;
+
     display: flex;
     justify-content: space-between;
     font-size: 24px;
     color: $main-light-color;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 
     &__title {
     }
@@ -24,8 +26,6 @@
         background-color: $main-light-color;
         color: $secondary-color;
       }
-
-
     }
 
     .ant-input-group-addon {
@@ -44,12 +44,10 @@
     }
   }
 
-  &:first-child {
-    margin-top: 16px;
-  }
-
-  &_collapse {
-    margin-top: 16px;
+  &__help_text {
+    color: $main-light-color;
+    font-size: 16px;
+    margin: 20px 0;
   }
 
   .ant-collapse-header {

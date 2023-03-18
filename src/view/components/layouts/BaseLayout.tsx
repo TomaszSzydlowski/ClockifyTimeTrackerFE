@@ -21,7 +21,7 @@ export const BaseLayout: FC<BaseLayoutProps> = ({
     children,
 }) => {
     return (
-        <Layout className="px-2">
+        <Layout className="px-4">
             {isHeader && (
                 <Header>
                     <HeaderContent />

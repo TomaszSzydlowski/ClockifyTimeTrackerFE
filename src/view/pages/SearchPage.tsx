@@ -180,6 +180,7 @@ export const SearchPage: FC = () => {
                         onChange={onChange}
                     />
                 </div>
+                <div className="search_page__help_text">Browse all</div>
                 <div className="search_page_collapse">
                     <Collapse
                         bordered={false}
