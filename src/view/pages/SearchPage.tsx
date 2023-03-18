@@ -1,4 +1,5 @@
-﻿import { AnyAction } from '@reduxjs/toolkit'
+﻿import { CameraOutlined } from '@ant-design/icons'
+import { AnyAction } from '@reduxjs/toolkit'
 import { Collapse } from 'antd'
 import { Input } from 'antd'
 import React, {
@@ -13,7 +14,6 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { ProjectView, TaskView } from '../../core/types/Project'
 import { QuickActionTask } from '../../core/types/QuickActionTask'
-import { lastTimeEntriesAsyncActions } from '../../store/features/clockify/last-time-entries/asyncActions'
 import { projectsAsyncActions } from '../../store/features/clockify/projects/asyncActions'
 import { projectsClockifySelectors } from '../../store/features/clockify/projects/selectors'
 import { trackingAsyncActions } from '../../store/features/clockify/tracking/asyncActions'
@@ -167,7 +167,19 @@ export const SearchPage: FC = () => {
     return (
         <BaseLayout>
             <div className="search_page">
-                <Search placeholder="tasks search" allowClear onChange={onChange} />
+                <div className="search_page_header">
+                    <div className="search_page_header__title">Search</div>
+                    <div className="search_page_header__icon">
+                        <CameraOutlined />
+                    </div>
+                </div>
+                <div className="search_page__input">
+                    <Search
+                        placeholder="What task are you looking for?"
+                        allowClear
+                        onChange={onChange}
+                    />
+                </div>
                 <div className="search_page_collapse">
                     <Collapse
                         bordered={false}

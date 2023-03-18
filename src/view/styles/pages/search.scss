@@ -1,12 +1,58 @@
-﻿.search_page{
-  &:first-child{
+﻿@import "../varibales";
+
+.search_page {
+  &_header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+    color: $main-light-color;
+    margin-bottom: 12px;
+
+    &__title {
+    }
+
+    &__icon {
+
+    }
+  }
+
+  &__input {
+    .ant-input-affix-wrapper {
+      background-color: $main-light-color;
+
+      input {
+        background-color: $main-light-color;
+        color: $secondary-color;
+      }
+
+
+    }
+
+    .ant-input-group-addon {
+      button {
+        background-color: $main-light-color !important;
+        border-left: none;
+
+        svg {
+          color: $secondary-color;
+        }
+      }
+    }
+
+    ::placeholder {
+      color: $secondary-color;
+    }
+  }
+
+  &:first-child {
     margin-top: 16px;
   }
-&_collapse{
-  margin-top: 16px;
-}
-  
-  .ant-collapse-header{
+
+  &_collapse {
+    margin-top: 16px;
+  }
+
+  .ant-collapse-header {
     color: inherit !important;
   }
 }
