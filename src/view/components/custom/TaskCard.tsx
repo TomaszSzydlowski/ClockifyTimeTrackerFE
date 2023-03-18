@@ -1,4 +1,4 @@
-﻿import { CaretRightOutlined, PauseOutlined } from '@ant-design/icons'
+﻿import { PauseCircleOutlined, PauseOutlined, PlayCircleOutlined } from '@ant-design/icons'
 import { Button, Card, Col, Row, Tag } from 'antd'
 import React, { FC } from 'react'
 
@@ -40,8 +40,14 @@ export const TaskCard: FC<TaskCardProps> = ({
                     </Col>
                     <Col span={3} className="task_box__action">
                         <Button
-                            shape="circle"
-                            icon={isTracking ? <PauseOutlined /> : <CaretRightOutlined />}
+                            type={'text'}
+                            icon={
+                                isTracking ? (
+                                    <PauseCircleOutlined />
+                                ) : (
+                                    <PlayCircleOutlined />
+                                )
+                            }
                             className="task_box__action--button"
                             onClick={() => {
                                 isTracking ? onPauseClick() : onStartClick()
