@@ -53,4 +53,42 @@
   .ant-collapse-header {
     color: inherit !important;
   }
+
+
+  .ant-collapse-item {
+    background-color: $card-background-lvl-1;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    border: 1px;
+
+    &.ant-collapse-item-active {
+      .ant-collapse-expand-icon {
+        transform: rotate(180deg);
+      }
+    }
+
+    .ant-collapse-expand-icon {
+      transform: rotate(90deg);
+      padding: 0 !important;
+      margin: auto;
+
+      svg {
+        font-size: 24px;
+      }
+    }
+
+    .ant-collapse-header-text {
+      padding-right: 8px;
+    }
+
+    .ant-collapse-content {
+      .task_box {
+        margin-bottom: 8px;
+        
+        .ant-card-body {
+          background-color: $card-background-lvl-2;
+        }
+      }
+    }
+  }
 }

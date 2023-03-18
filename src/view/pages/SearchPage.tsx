@@ -183,6 +183,7 @@ export const SearchPage: FC = () => {
                 <div className="search_page__help_text">Browse all</div>
                 <div className="search_page_collapse">
                     <Collapse
+                        expandIconPosition="right"
                         bordered={false}
                         activeKey={activityKey}
                         onChange={(key) => setActivityKey(key)}
