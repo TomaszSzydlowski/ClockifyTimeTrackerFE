@@ -1,5 +1,29 @@
 ﻿@import "../varibales";
 
+/* ------------ANIMACJA-PRZESUN------------ */
+@keyframes przesun {
+  0% {
+    transform: translateX(0);
+    padding-left: 110%;
+  }
+  100% {
+    transform: translateX(-100%);
+    padding-left: 110%;
+  }
+}
+
+@-webkit-keyframes przesun /* dla Google Chrome, Safari, Opera 15+ */
+{
+  0% {
+    -webkit-transform: translateX(0);
+    padding-left: 110%;
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+    padding-left: 110%;
+  }
+}
+
 .footer_box {
   height: 120px;
 
@@ -38,11 +62,25 @@
         margin: auto;
 
         &__task_name {
-          text-overflow: ellipsis;
-          white-space: nowrap;
+          position: relative;
+          height: 16px;
+          line-height: 16px;
+          margin: 0 auto;
+          font-size: 16px;
           overflow: hidden;
-          width: 100%;
 
+          & > span {
+            position: absolute;
+            margin: 0;
+            white-space: nowrap;
+            animation: przesun 30s linear infinite;
+            -webkit-animation: przesun 30s linear infinite;
+
+            &:hover {
+              animation-play-state: paused;
+              -webkit-animation-play-state: paused;
+            }
+          }
         }
 
         &_details {

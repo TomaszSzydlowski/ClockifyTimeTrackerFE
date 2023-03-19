@@ -102,7 +102,7 @@ export const TrackerPlayer: FC = () => {
                     </div>
                     <div className="tracker_player_box_information">
                         <div className="tracker_player_box_information__task_name">
-                            {playerInfo?.taskName || 'Unknown task name'}
+                            <span>{playerInfo?.taskName || 'Unknown task name'}</span>
                         </div>
                         <Row className="tracker_player_box_information_details">
                             <Col
