@@ -9,6 +9,10 @@ export default defineConfig({
         react(),
         basicSsl(),
         VitePWA({
+            workbox: {
+                sourcemap: true,
+            },
+            registerType: 'autoUpdate',
             manifest: {
                 name: 'Clockify Time Tracker',
                 short_name: 'Clockwise',
