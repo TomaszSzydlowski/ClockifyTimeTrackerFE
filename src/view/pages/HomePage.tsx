@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { lastTimeEntriesAsyncActions } from '../../store/features/clockify/last-time-entries/asyncActions'
 import { userClockifySelectors } from '../../store/features/clockify/user/selectors'
 import { Tasks } from '../components/custom/Tasks'
+import { WelcomeHeader } from '../components/custom/WelcomeHeader'
 import { BaseLayout } from '../components/layouts/BaseLayout'
 
 export const HomePage: FC = () => {
@@ -23,8 +24,9 @@ export const HomePage: FC = () => {
     }, [userId, workspaceId])
 
     return (
-        <BaseLayout isHeader>
+        <BaseLayout>
             <div className="home_page_box">
+                <WelcomeHeader />
                 <Tasks />
             </div>
         </BaseLayout>

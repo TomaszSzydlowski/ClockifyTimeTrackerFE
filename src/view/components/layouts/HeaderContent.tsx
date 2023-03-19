@@ -1,29 +1,5 @@
-﻿import { Tag } from 'antd'
-import React, { FC, useState } from 'react'
-
-const { CheckableTag } = Tag
-
-const tagsData = ['Yours', 'Current sprint', 'Last Task']
+﻿import React, { FC } from 'react'
 
 export const HeaderContent: FC = () => {
-    const [selectedTags, setSelectedTags] = useState<string[]>(['Last Task'])
-    const handleChange = (tag: string, checked: boolean) => {
-        const nextSelectedTags = checked
-            ? [...selectedTags, tag]
-            : selectedTags.filter((t) => t !== tag)
-        setSelectedTags(nextSelectedTags)
-    }
-    return (
-        <>
-            {tagsData.map((tag) => (
-                <CheckableTag
-                    key={tag}
-                    checked={selectedTags.indexOf(tag) > -1}
-                    onChange={(checked) => handleChange(tag, checked)}
-                >
-                    {tag}
-                </CheckableTag>
-            ))}
-        </>
-    )
+    return <></>
 }
