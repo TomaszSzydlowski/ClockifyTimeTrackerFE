@@ -34,7 +34,7 @@
         width: 100%;
         padding-left: 4px;
         padding-right: 16px;
-        font-size: 12px;
+        font-size: 16px;
         margin: auto;
 
         &__task_name {
@@ -42,7 +42,7 @@
           white-space: nowrap;
           overflow: hidden;
           width: 100%;
-          
+
         }
 
         &_details {
@@ -54,6 +54,10 @@
             display: block !important;
             text-align: right;
             font-weight: 700;
+          }
+
+          &__author {
+            font-weight: 300;
           }
         }
       }
@@ -91,8 +95,8 @@
   }
 
   .task_box__action {
-    button{
-      svg{
+    button {
+      svg {
         font-size: 16px;
       }
     }
