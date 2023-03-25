@@ -51,7 +51,7 @@ export const QRCodeModal: FC<QRCreatorModalProps> = ({ title, description }) => 
                             size={240}
                             errorLevel="H"
                             value={url}
-                            icon="https://imgtr.ee/images/2023/02/25/RW1BU.png"
+                            icon="https://imgtr.ee/images/2023/03/25/9TLGL.png"
                         />
                     )}
                 </Col>
