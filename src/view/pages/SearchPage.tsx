@@ -43,6 +43,7 @@ export const SearchPage: FC = () => {
         ProjectQuickActionTasks[]
     >([])
     const [activityKey, setActivityKey] = useState<string | string[]>([])
+    const [searchValue, setSearchValue] = useState<string | undefined>(undefined)
 
     const setDefaultProjects = () => {
         if (
@@ -72,24 +73,11 @@ export const SearchPage: FC = () => {
     useEffect(() => {
         if (!yoursProjectsView || yoursProjectsView.length === 0) return
 
-        const projectQuickActionTasks: ProjectQuickActionTasks[] = yoursProjectsView.map(
-            (project) => ({
-                name: project.name,
-                color: project.color,
-                quickActionTasks: project.tasks.map((task) => ({
-                    taskId: task.id,
-                    projectId: project.id,
-                    description: task.name,
-                    isTracking: checkIfIsTracking(project, task),
-                })),
-            }),
-        )
-
-        setProjectQuickActionTasks(projectQuickActionTasks)
+        filterAndSetProjectQuickActionTasks(yoursProjectsView, searchValue)
         return () => {
             setProjectQuickActionTasks([])
         }
-    }, [yoursProjectsView, tracking])
+    }, [yoursProjectsView, tracking, searchValue])
 
     const checkIfIsTracking = (project?: ProjectView, task?: TaskView) => {
         if (tracking === undefined) return false
@@ -130,33 +118,39 @@ export const SearchPage: FC = () => {
         )
     }
 
-    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value
-        const projectQuickActionTasks: ProjectQuickActionTasks[] = yoursProjectsView.map(
-            (project) => {
-                const newTasks = project.tasks.filter((task) =>
-                    task.name.toLowerCase().includes(value.toLowerCase()),
-                )
-                return {
-                    name: project.name,
-                    color: project.color,
-                    quickActionTasks: newTasks.map((task) => ({
-                        taskId: task.id,
-                        projectId: project.id,
-                        description: task.name,
-                        isTracking: checkIfIsTracking(project, task),
-                    })),
-                }
-            },
-        )
+    const filterAndSetProjectQuickActionTasks = (
+        yoursProjectsView: ProjectView[],
+        value?: string,
+    ) => {
+        const projectQuickActionTasks = yoursProjectsView.map((project) => {
+            const newTasks = value
+                ? project.tasks.filter((task) =>
+                      task.name.toLowerCase().includes(value.toLowerCase()),
+                  )
+                : project.tasks
+
+            return {
+                name: project.name,
+                color: project.color,
+                quickActionTasks: newTasks.map((task) => ({
+                    taskId: task.id,
+                    projectId: project.id,
+                    description: task.name,
+                    isTracking: checkIfIsTracking(project, task),
+                })),
+            }
+        })
+
         const removeEmptyProject = projectQuickActionTasks.filter(
             (project) => project.quickActionTasks.length > 0,
         )
+
         setProjectQuickActionTasks(removeEmptyProject)
-        if (value === '') {
-            setActivityKey([])
+
+        if (!value) {
             return
         }
+
         const activeKeyOpenWhenFound = removeEmptyProject.map((_, index) =>
             index.toString(),
         )
@@ -177,7 +171,8 @@ export const SearchPage: FC = () => {
                         autoFocus={isSearchAutoFocusOn}
                         placeholder="What task are you looking for?"
                         allowClear
-                        onChange={onChange}
+                        onChange={(e) => setSearchValue(e.target.value)}
+                        value={searchValue}
                     />
                 </div>
                 <div className="search_page__help_text">Browse all</div>
