@@ -2,16 +2,11 @@
 import { AnyAction } from '@reduxjs/toolkit'
 import { Collapse } from 'antd'
 import { Input } from 'antd'
-import React, {
-    ChangeEvent,
-    ChangeEventHandler,
-    FC,
-    FormEvent,
-    useEffect,
-    useState,
-} from 'react'
+import React, { ChangeEvent, FC, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useSearchParams } from 'react-router-dom'
 
+import { SearchShortCuts } from '../../core/short-cuts/SearchShortCuts'
 import { ProjectView, TaskView } from '../../core/types/Project'
 import { QuickActionTask } from '../../core/types/QuickActionTask'
 import { projectsAsyncActions } from '../../store/features/clockify/projects/asyncActions'
@@ -34,16 +29,19 @@ interface ProjectQuickActionTasks {
 
 export const SearchPage: FC = () => {
     const dispatch = useDispatch()
+    const [searchParams] = useSearchParams()
+    const isSearchAutoFocusOn = !!searchParams.get('isSearchAutoFocusOn')
 
     const projects = useSelector(projectsClockifySelectors.getProjects)
     const yoursProjects = useSelector(yoursProjectsSelectors.getYoursProjects)
+    const userId = useSelector(userClockifySelectors.getUserId)
+    const workspaceId = useSelector(userClockifySelectors.getDefaultWorkspaceId)
+    const tracking = useSelector(trackingClockifySelectors.getTracking)
+
     const [yoursProjectsView, setYoursProjectsView] = useState<ProjectView[]>([])
     const [projectQuickActionTasks, setProjectQuickActionTasks] = useState<
         ProjectQuickActionTasks[]
     >([])
-    const userId = useSelector(userClockifySelectors.getUserId)
-    const workspaceId = useSelector(userClockifySelectors.getDefaultWorkspaceId)
-    const tracking = useSelector(trackingClockifySelectors.getTracking)
     const [activityKey, setActivityKey] = useState<string | string[]>([])
 
     const setDefaultProjects = () => {
@@ -164,6 +162,7 @@ export const SearchPage: FC = () => {
         )
         setActivityKey(activeKeyOpenWhenFound)
     }
+
     return (
         <BaseLayout>
             <div className="search_page">
@@ -175,6 +174,7 @@ export const SearchPage: FC = () => {
                 </div>
                 <div className="search_page__input">
                     <Search
+                        autoFocus={isSearchAutoFocusOn}
                         placeholder="What task are you looking for?"
                         allowClear
                         onChange={onChange}
@@ -183,7 +183,7 @@ export const SearchPage: FC = () => {
                 <div className="search_page__help_text">Browse all</div>
                 <div className="search_page_collapse">
                     <Collapse
-                        expandIconPosition="right"
+                        expandIconPosition="end"
                         bordered={false}
                         activeKey={activityKey}
                         onChange={(key) => setActivityKey(key)}
@@ -215,6 +215,7 @@ export const SearchPage: FC = () => {
                     </Collapse>
                 </div>
             </div>
+            <SearchShortCuts />
         </BaseLayout>
     )
 }
