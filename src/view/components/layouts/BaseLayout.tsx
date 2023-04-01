@@ -7,6 +7,7 @@ import { HeaderContent } from './HeaderContent'
 
 export interface BaseLayoutProps {
     isHeader?: boolean
+    hideFooter?: boolean
     headerHeight?: number
     footerHeight?: number
     children?: ReactNode
@@ -16,6 +17,7 @@ const { Header, Footer, Content } = Layout
 
 export const BaseLayout: FC<BaseLayoutProps> = ({
     isHeader,
+    hideFooter,
     headerHeight = 48,
     footerHeight = 120,
     children,
@@ -30,16 +32,18 @@ export const BaseLayout: FC<BaseLayoutProps> = ({
             <Layout
                 style={{
                     minHeight: `calc(100vh - ${
-                        isHeader ? headerHeight : 0 + footerHeight
+                        isHeader ? headerHeight : 0 + (hideFooter ? 0 : footerHeight)
                     }px)`,
                 }}
             >
                 <Content>{children}</Content>
                 <ModalContainer />
             </Layout>
-            <Footer>
-                <FooterContent />
-            </Footer>
+            {!hideFooter && (
+                <Footer>
+                    <FooterContent />
+                </Footer>
+            )}
         </Layout>
     )
 }

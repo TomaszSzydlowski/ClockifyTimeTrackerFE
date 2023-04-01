@@ -1,6 +1,7 @@
 ﻿.task_box {
   padding-bottom: 4px;
-
+  cursor: pointer;
+  
   .ant-card-body {
     padding: 8px;
   }
@@ -27,9 +28,11 @@
     display: flex !important;
     justify-content: center;
     align-items: center;
-    button{
+
+    button {
       padding: 0;
-      svg{
+
+      svg {
         font-size: 24px;
       }
     }

@@ -5,20 +5,12 @@ import React, { FC, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { useLiveTime } from '../../../core/hooks/useLiveTime'
+import { TaskInfo } from '../../../core/types/TaskInfo'
 import { lastTimeEntriesSelectors } from '../../../store/features/clockify/last-time-entries/selectors'
 import { projectsClockifySelectors } from '../../../store/features/clockify/projects/selectors'
 import { trackingAsyncActions } from '../../../store/features/clockify/tracking/asyncActions'
 import { trackingClockifySelectors } from '../../../store/features/clockify/tracking/selectors'
 import { userClockifySelectors } from '../../../store/features/clockify/user/selectors'
-
-interface PlayerInfo {
-    projectColor?: string
-    projectName?: string
-    taskName?: string
-    authorName?: string
-    projectId?: string
-    taskId?: string
-}
 
 export const TrackerPlayer: FC = () => {
     const dispatch = useDispatch()
@@ -30,7 +22,7 @@ export const TrackerPlayer: FC = () => {
     const workspaceId = useSelector(userClockifySelectors.getDefaultWorkspaceId)
 
     const { displayTimeView } = useLiveTime()
-    const [playerInfo, setPlayerInfo] = useState<PlayerInfo | undefined>(undefined)
+    const [playerInfo, setPlayerInfo] = useState<TaskInfo | undefined>(undefined)
 
     const handleStartClick = async (taskId?: string, projectId?: string) => {
         if (!projectId) return console.error('missing projectId')
@@ -63,7 +55,7 @@ export const TrackerPlayer: FC = () => {
                 (project) => project.id === lastTimeEntry.projectId,
             )
             const task = project?.tasks.find((task) => task.id === lastTimeEntry.taskId)
-            const newPlayerInfo: PlayerInfo = {
+            const newPlayerInfo: TaskInfo = {
                 projectId: project?.id,
                 taskId: task?.id,
                 projectName: project?.name,
@@ -77,7 +69,7 @@ export const TrackerPlayer: FC = () => {
         if (tracking !== undefined) {
             const project = projects.find((project) => project.id === tracking.projectId)
             const task = project?.tasks.find((task) => task.id === tracking.taskId)
-            const newPlayerInfo: PlayerInfo = {
+            const newPlayerInfo: TaskInfo = {
                 projectId: project?.id,
                 taskId: task?.id,
                 projectName: project?.name,

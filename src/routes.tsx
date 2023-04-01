@@ -6,6 +6,7 @@ import { SearchPage } from './view/pages/SearchPage'
 import { SettingsPage } from './view/pages/SettingsPage'
 import { StartTrackingBaseOnQRCode } from './view/pages/StartTrackingBaseOnQRCode'
 import { StatisticsPage } from './view/pages/StatisticsPage'
+import { TaskPage } from './view/pages/TaskPage'
 
 interface ConfigRoute {
     path: string
@@ -45,6 +46,11 @@ export const AppRoutes: ConfigRoute[] = [
     {
         path: '/statistics',
         component: StatisticsPage,
+        allowUserWithNoAccess: false,
+    },
+    {
+        path: '/task',
+        component: TaskPage,
         allowUserWithNoAccess: false,
     },
     {

@@ -1,6 +1,7 @@
-﻿import { PauseCircleOutlined, PauseOutlined, PlayCircleOutlined } from '@ant-design/icons'
+﻿import { PauseCircleOutlined, PlayCircleOutlined } from '@ant-design/icons'
 import { Button, Card, Col, Row, Tag } from 'antd'
 import React, { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export interface ProjectTag {
     text: string
@@ -12,6 +13,7 @@ interface TaskCardProps {
     projectTags?: ProjectTag[]
     onStartClick: () => void
     onPauseClick: () => void
+    taskUrl: string
     isTracking: boolean
 }
 
@@ -20,10 +22,13 @@ export const TaskCard: FC<TaskCardProps> = ({
     projectTags,
     onPauseClick,
     onStartClick,
+    taskUrl,
     isTracking,
 }) => {
+    const navigate = useNavigate()
+
     return (
-        <div className="task_box">
+        <div className="task_box" onClick={() => navigate(taskUrl)}>
             <Card>
                 <Row>
                     <Col span={21} className="task_box_description">
@@ -49,7 +54,8 @@ export const TaskCard: FC<TaskCardProps> = ({
                                 )
                             }
                             className="task_box__action--button"
-                            onClick={() => {
+                            onClick={(e) => {
+                                e.stopPropagation()
                                 isTracking ? onPauseClick() : onStartClick()
                             }}
                         />

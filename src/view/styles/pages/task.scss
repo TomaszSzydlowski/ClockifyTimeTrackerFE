@@ -1,0 +1,95 @@
+﻿@import "../varibales";
+
+
+.task-page {
+  color: $main-light-color;
+
+  &-header {
+    position: relative;
+    padding: 20px 0;
+    text-align: center;
+    align-items: center;
+
+    &__back {
+      position: absolute;
+      top: 20px;
+      left: -6px;
+      font-size: 30px;
+    }
+
+    &__title {
+      margin: 0 32px;
+      font-size: 16px;
+    }
+  }
+
+  &_qr_code {
+  }
+
+  &-task-card {
+    margin: 20px 0;
+    display: flex;
+
+    &__project-line {
+      width: 4px;
+    }
+
+    &-content {
+      padding: 0 8px;
+      width: 100%;
+
+      &__title {
+        font-size: 16px;
+        position: relative;
+        height: 16px;
+        line-height: 16px;
+        overflow: hidden;
+
+        span {
+          position: absolute;
+          margin: 0;
+          white-space: nowrap;
+          animation: przesun 30s linear infinite;
+          -webkit-animation: przesun 30s linear infinite;
+        }
+
+        &:hover {
+          animation-play-state: paused;
+          -webkit-animation-play-state: paused;
+        }
+      }
+
+      &-others {
+        display: flex;
+        justify-content: space-between;
+
+        &__description {
+          font-size: 14px;
+          position: relative;
+
+          span {
+            position: absolute;
+            width: 200px;
+            bottom: 4px;
+          }
+        }
+
+        &__actions {
+          button {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+
+  &-progress {
+    margin-top: 40px;
+
+    &-content {
+      display: flex;
+      justify-content: space-between;
+      font-size: 16px;
+    }
+  }
+}

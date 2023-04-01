@@ -35,6 +35,10 @@ export const Tasks: FC = () => {
             }) as unknown as AnyAction,
         )
     }
+
+    const getTaskUrl = (projectId: string, taskId: string | undefined) =>
+        `/task?projectId=${projectId}&taskId=${taskId}`
+
     return (
         <div>
             {quickActionTask.map((quickActionTask, index) => (
@@ -42,6 +46,10 @@ export const Tasks: FC = () => {
                     key={index}
                     description={quickActionTask.description}
                     projectTags={quickActionTask.tags}
+                    taskUrl={getTaskUrl(
+                        quickActionTask.projectId,
+                        quickActionTask.taskId,
+                    )}
                     onStartClick={() =>
                         handleStartClick(
                             quickActionTask.projectId,
