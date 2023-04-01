@@ -6,6 +6,7 @@ import { useQuickActionTasks } from '../../../core/hooks/useQuickActionTasks'
 import { trackingAsyncActions } from '../../../store/features/clockify/tracking/asyncActions'
 import { userClockifySelectors } from '../../../store/features/clockify/user/selectors'
 import { TaskCard } from './TaskCard'
+import { TaskService } from './TaskService'
 
 export const Tasks: FC = () => {
     const dispatch = useDispatch()
@@ -36,9 +37,6 @@ export const Tasks: FC = () => {
         )
     }
 
-    const getTaskUrl = (projectId: string, taskId: string | undefined) =>
-        `/task?projectId=${projectId}&taskId=${taskId}`
-
     return (
         <div>
             {quickActionTask.map((quickActionTask, index) => (
@@ -46,7 +44,7 @@ export const Tasks: FC = () => {
                     key={index}
                     description={quickActionTask.description}
                     projectTags={quickActionTask.tags}
-                    taskUrl={getTaskUrl(
+                    taskUrl={TaskService.getTaskUrl(
                         quickActionTask.projectId,
                         quickActionTask.taskId,
                     )}

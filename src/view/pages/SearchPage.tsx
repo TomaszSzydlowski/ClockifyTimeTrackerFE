@@ -16,6 +16,7 @@ import { trackingClockifySelectors } from '../../store/features/clockify/trackin
 import { userClockifySelectors } from '../../store/features/clockify/user/selectors'
 import { yoursProjectsSelectors } from '../../store/features/clockify/yours-projects/selectors'
 import { TaskCard } from '../components/custom/TaskCard'
+import { TaskService } from '../components/custom/TaskService'
 import { BaseLayout } from '../components/layouts/BaseLayout'
 
 const { Panel } = Collapse
@@ -202,6 +203,10 @@ export const SearchPage: FC = () => {
                                             }
                                             onPauseClick={handlePauseClick}
                                             isTracking={quickActionTask.isTracking}
+                                            taskUrl={TaskService.getTaskUrl(
+                                                quickActionTask.projectId,
+                                                quickActionTask.taskId,
+                                            )}
                                         />
                                     ),
                                 )}
